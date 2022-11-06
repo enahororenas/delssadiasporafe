@@ -13,5 +13,7 @@ import Addnewsitem from "./Addnewsitem";
 import Members from "./Members";
 import Adduser from './Adduser'
 import Deletenewsitem from "./Deletenewsitem";
-export {Profile,SharedLayout,Dash,About,GeneralSharedLayout,Contact,Addleader,Leadership,
+import Project from "./Project";
+import Addproject from "./Addproject";
+export {Profile,SharedLayout,Dash,About,GeneralSharedLayout,Contact,Addleader,Leadership,Project,Addproject,
     News,Gallery,Addnewimage,Addnewsitem,Members,Adduser,Deletenewsitem}
