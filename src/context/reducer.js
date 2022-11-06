@@ -18,7 +18,9 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,CHANGE_IMAGE_PAG
     GET_COMMENT_BEGIN,GET_COMMENT_SUCCESS,GET_COMMENT_ERROR,
     DELETE_COMMENT_BEGIN,DELETE_COMMENT_ERROR,DELETE_COMMENT_SUCCESS,
     ADD_NEW_EXCO_BEGIN,ADD_NEW_EXCO_ERROR,ADD_NEW_EXCO_SUCCESS,
-    GET_EXCO_BEGIN,GET_EXCO_ERROR,GET_EXCO_SUCCESS,
+    GET_EXCO_BEGIN,GET_EXCO_ERROR,GET_EXCO_SUCCESS,ADD_PROJECT_BEGIN,ADD_PROJECT_ERROR,ADD_PROJECT_SUCCESS,
+    GET_PROJECT_BEGIN,GET_PROJECT_ERROR,GET_PROJECT_SUCCESS,EDIT_PROJECT_BEGIN,DELETE_PROJECT_BEGIN,
+    EDIT_PROJECT_ERROR,EDIT_PROJECT_SUCCESS,DELETE_PROJECT_ERROR,DELETE_PROJECT_SUCCESS,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -602,6 +604,81 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
       } 
 
       if(action.type === GET_EXCO_ERROR){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'danger',
+        alertText:action.payload.msg
+        }
+    }
+
+    if(action.type === ADD_PROJECT_BEGIN){
+        return{...state,isLoading:true}
+    }
+
+    if(action.type === ADD_PROJECT_SUCCESS){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'success',
+        alertText:'New Project Added'
+        }
+    }
+
+    if(action.type === ADD_PROJECT_ERROR){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'danger',
+        alertText:action.payload.msg
+        }
+    }
+
+    if (action.type === GET_PROJECT_BEGIN) {
+        return { ...state, isLoading: true, showAlert: false }
+      }
+      if (action.type === GET_PROJECT_SUCCESS) {
+        return {
+          ...state,
+          isLoading: false,
+          projects:action.payload.projects,
+          totalProject: action.payload.totalProject,
+        }
+      } 
+
+      if(action.type === GET_PROJECT_ERROR){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'danger',
+        alertText:action.payload.msg
+        }
+    }
+
+    if (action.type === EDIT_PROJECT_BEGIN || action.type === DELETE_PROJECT_BEGIN) {
+        return { ...state, isLoading: true, showAlert: false }
+      }
+      if (action.type === EDIT_PROJECT_SUCCESS ) {
+        return {
+          ...state,
+          isLoading: false,
+          showAlert:true,
+          alertType:'success',
+          alertText:'Project Updated'
+        }
+      } 
+
+      if ( action.type === DELETE_PROJECT_SUCCESS) {
+        return {
+          ...state,
+          isLoading: false,
+          showAlert:true,
+          alertType:'success',
+          alertText:'Project Deleted'
+        }
+      } 
+
+      if(action.type === EDIT_PROJECT_ERROR || action.type === DELETE_PROJECT_ERROR){
         return{...state,
         isLoading:false,
         showAlert:true,
