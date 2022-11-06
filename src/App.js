@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {Register, Landing, Error,ProtectedRoute} from './pages'
-import {Profile,Dash,About,Contact,News,Gallery,Addleader,Leadership,
+import {Profile,Dash,About,Contact,News,Gallery,Addleader,Leadership,Project,Addproject,
   Addnewimage,Addnewsitem,Members,Adduser,Deletenewsitem} from './pages/dashboard'
 
 
@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
       <Route path='/' element={<Landing/>}/>
+      <Route path='/project' element={<ProtectedRoute><Project/></ProtectedRoute>}/>
       <Route path='/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
       <Route path='/user' element={<ProtectedRoute><Dash/></ProtectedRoute>}/>
       <Route path='/about' element={<ProtectedRoute><About/></ProtectedRoute>}/>
@@ -24,6 +25,7 @@ function App() {
       <Route path='/deletenews' element={<ProtectedRoute><Deletenewsitem/></ProtectedRoute>} />
       <Route path='/addexec' element={<ProtectedRoute><Addleader/></ProtectedRoute>}/>
       <Route path='/exco' element={<ProtectedRoute><Leadership/></ProtectedRoute>}/>
+      <Route path='/addproject' element={<ProtectedRoute><Addproject/></ProtectedRoute>}/>
       <Route path='*' element={<Error/>} />
       </Routes>
     </BrowserRouter>
