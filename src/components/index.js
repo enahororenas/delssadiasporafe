@@ -13,5 +13,7 @@ import Newsitem from "./Newsitem";
 import Slideshow from "./Slideshow";
 import Gallerynavbar from "./Gallerynavbar";
 import Comments from "./Comment/Comments";
-export {Logo,FormRow,Alert,SmallSidebar,BigSidebar,Navbar,Slideshow,Gallerynavbar,
+import Projectitem from "./Projectitem";
+import Dropdown from "./Dropdown";
+export {Logo,FormRow,Alert,SmallSidebar,BigSidebar,Navbar,Slideshow,Gallerynavbar,Projectitem,Dropdown,
 Profilecontainer,UserInfo,SearchContainer,FormRowSelect,JobsContainer,Newsitem,Comments}
