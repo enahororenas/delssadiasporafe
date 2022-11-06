@@ -51,7 +51,7 @@ const Wrapper = styled.aside`
    }
 
    .bar-details-admin{
-    padding-top:6rem;
+    padding-top:12rem;
    }
 
 
