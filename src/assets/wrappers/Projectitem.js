@@ -14,7 +14,8 @@ const Wrapper = styled.div`
     margin-top: 20px;
   }
   .description{
-    color: #974ede;
+    //color: #974ede;
+    color: var(--primary-300);
   }
 
   .amt{
@@ -26,7 +27,8 @@ const Wrapper = styled.div`
     height: 60px;
     display: grid;
     place-items: center;
-    background: #5D3FD3;
+    //background: #5D3FD3;
+    background: var(--primary-500);
     border-radius: 12px;
     font-size: 1.5rem;
     font-weight: 700;
