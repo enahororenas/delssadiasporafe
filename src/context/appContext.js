@@ -17,6 +17,8 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,DISPLAY_CUSTOM_A
     DELETE_COMMENT_BEGIN,DELETE_COMMENT_ERROR,DELETE_COMMENT_SUCCESS,
     DELETE_NEWS_ITEM_BEGIN,DELETE_NEWS_ITEM_ERROR,DELETE_NEWS_ITEM_SUCCESS,
     ADD_NEW_EXCO_BEGIN,ADD_NEW_EXCO_ERROR,ADD_NEW_EXCO_SUCCESS, GET_EXCO_BEGIN, GET_EXCO_SUCCESS, GET_EXCO_ERROR,
+    ADD_PROJECT_BEGIN,ADD_PROJECT_ERROR,ADD_PROJECT_SUCCESS,GET_PROJECT_BEGIN,GET_PROJECT_ERROR,GET_PROJECT_SUCCESS,
+    EDIT_PROJECT_ERROR,EDIT_PROJECT_SUCCESS,DELETE_PROJECT_ERROR,DELETE_PROJECT_SUCCESS,EDIT_PROJECT_BEGIN,DELETE_PROJECT_BEGIN,
  } from "./action";
 import reducer from "./reducer";
 import axios from 'axios'
@@ -73,6 +75,8 @@ const initialState = {
     commentIndex:0,
     excoMembers:[],
     totalExco:0,
+    projects:[],
+    totalProject:0,
 }
 
 const AppContext = React.createContext()
@@ -158,7 +162,7 @@ const AppProvider = ({children}) => {
             //console.log('REG ERROR',error.response)
             dispatch({
                type:SETUP_USER_ERROR,
-              payload:{msg:error.response.data.msg}
+              payload:{msg:error.response}
             })
         }
 
@@ -251,6 +255,63 @@ const AppProvider = ({children}) => {
         clearAlert()
     }
 
+    const addNewProject = async(input) => {
+        dispatch({type:ADD_PROJECT_BEGIN})
+        try {
+            await authFetch.post('/project/addproject',input)
+            dispatch({type:ADD_PROJECT_SUCCESS})    
+        }catch(error){
+            dispatch({type:ADD_PROJECT_ERROR})
+        }
+        clearAlert()
+    }   
+
+    const getProjects = async() => {
+    let url =`/project/addproject`  
+    dispatch({type:GET_PROJECT_BEGIN})
+    try { 
+        const {data} = await authFetch.get(url)
+        const{projects,totalProject} = data
+        dispatch({type:GET_PROJECT_SUCCESS,
+        payload:{projects,totalProject}
+        })    
+    }catch(error){
+        dispatch({type:GET_PROJECT_ERROR,
+            payload:{msg:error.response}
+            })
+    }
+    clearAlert()
+    }
+
+    const editProject = async(input) => {
+        let url =`/project/editproject`  
+        dispatch({type:EDIT_PROJECT_BEGIN})
+        try{
+            await authFetch.post(url,input)
+            dispatch({type:EDIT_PROJECT_SUCCESS})
+            getProjects()
+        } catch(error){
+        dispatch({type:EDIT_PROJECT_ERROR,
+            payload:{msg:error.response}
+            })
+        }
+        clearAlert()
+    }
+    
+    const deleteProject = async(input) => {
+        let url =`/project/deleteproject`  
+        dispatch({type:DELETE_PROJECT_BEGIN})
+        try{
+            await authFetch.post(url,input)
+            dispatch({type:DELETE_PROJECT_SUCCESS})
+            getProjects()
+        } catch(error){
+        dispatch({type:DELETE_PROJECT_ERROR,
+            payload:{msg:error.response}
+            })
+        }
+        clearAlert()
+    }
 
     const addLeader = async(input) => {
         dispatch({type:ADD_NEW_EXCO_BEGIN})
@@ -259,7 +320,7 @@ const AppProvider = ({children}) => {
             dispatch({type:ADD_NEW_EXCO_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEW_EXCO_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
@@ -276,11 +337,13 @@ const AppProvider = ({children}) => {
         })    
         }catch(error){
             dispatch({type:GET_EXCO_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
     }    
+
+    
 
     const addImage = async(input) => {
         dispatch({type:ADD_NEW_IMAGE_BEGIN})
@@ -290,7 +353,7 @@ const AppProvider = ({children}) => {
             dispatch({type:ADD_NEW_IMAGE_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEW_IMAGE_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
@@ -310,7 +373,7 @@ const AppProvider = ({children}) => {
         }catch(error){
             //console.log(error.response)
             dispatch({type:GET_IMAGES_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
     
@@ -324,7 +387,7 @@ const AppProvider = ({children}) => {
             dispatch({type:ADD_NEWS_ITEM_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEWS_ITEM_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
@@ -337,7 +400,7 @@ const AppProvider = ({children}) => {
             dispatch({type:DELETE_NEWS_ITEM_SUCCESS})    
         }catch(error){
             dispatch({type:DELETE_NEWS_ITEM_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert() 
@@ -355,7 +418,7 @@ const AppProvider = ({children}) => {
             })
         }catch(error){
             dispatch({type:GET_NEWS_ITEM_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
@@ -398,7 +461,7 @@ const AppProvider = ({children}) => {
             })
         }catch(error){
             dispatch({type:GET_MEMBERS_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
@@ -411,7 +474,7 @@ const AppProvider = ({children}) => {
             dispatch({type:ADD_NEW_USER_TO_REGISTER_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEW_USER_TO_REGISTER_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
@@ -427,7 +490,7 @@ const AppProvider = ({children}) => {
             })    
         }catch(error){
             dispatch({type:MAKE_ADMIN_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         }
         clearAlert()
@@ -460,7 +523,7 @@ const AppProvider = ({children}) => {
             })
         }catch(error){
             dispatch({type:GET_COMMENT_ERROR,
-                payload:{msg:error.response.data.msg}
+                payload:{msg:error.response}
                 })
         } 
         clearAlert()   
@@ -529,6 +592,10 @@ const AppProvider = ({children}) => {
             changeImagePage,
             addLeader,
             getExco,
+            addNewProject,
+            getProjects,
+            editProject,
+            deleteProject,
         }}>{children}</AppContext.Provider>
     )
 }
