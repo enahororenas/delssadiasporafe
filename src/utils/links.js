@@ -5,6 +5,7 @@ import {ImProfile} from 'react-icons/im'
 import { FaHome } from 'react-icons/fa'
 import { ImFilePicture } from 'react-icons/im'
 import {IoIosPeople} from 'react-icons/io'
+import {RiRefund2Line} from 'react-icons/ri'
 
     const links = [
         {id:1,text:'news',path:'/news',icon:<FaNewspaper/>},
@@ -14,7 +15,8 @@ import {IoIosPeople} from 'react-icons/io'
         {id:5,text:'Home',path:'/user',icon:<FaHome/>},
         {id:6,text:'Gallery',path:'/gallery',icon:<ImFilePicture/>},
         {id:7,text:'Members',path:'/members',icon:<IoIosPeople/>},
-        {id:8,text:'Executive Committee',path:'/exco',icon:<IoIosPeople/>},
+        {id:8,text:'Chapter Projects',path:'/project',icon:<RiRefund2Line/>},
+        {id:9,text:'Executive Committee',path:'/exco',icon:<IoIosPeople/>},
             ]
         
 export default links
