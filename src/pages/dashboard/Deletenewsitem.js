@@ -6,12 +6,26 @@ import Loading from '../../components/Loading'
 
 const Deletenewsitem = () => {
     const [selectedRows, setSelectedRows] = useState([]);
+    const [iRows, setiRows] = useState([]);
     const [selectedInfo, setSelectedInfo] = useState([]);
-    const [reload, setReload] = useState(false);
-    const {getNews,isLoading,news,showAlert,deleteNews} = useAppContext()
+    const [selectedEvent, setSelectedEvent] = useState([])
+    const [togglePage,settogglePage] = useState(true)
+    const {getNews,isLoading,news,showAlert,deleteNews,getEvent,events,deleteEvent} = useAppContext()
+
+
     useEffect(()=>{
      getNews()
-    },[reload])
+      getEvent()
+    },[])
+
+    const clear = () =>{
+      setSelectedRows([])
+      setiRows([])
+      setSelectedInfo([])
+      setSelectedEvent([])
+      settogglePage(!togglePage)
+    }
+
     if(isLoading){return <Loading center/>}
 
     const handleCheckbox = (event, newsItem,i) => { //console.log('NID',i,'=',event.target.checked)
@@ -27,18 +41,37 @@ const Deletenewsitem = () => {
         }))
       } else { delete selectedInfo[newsItem.nid] } 
    }
-    
+
+   const handleEventChange = (e, ev,i) => { 
+    setiRows((state) => ({
+      ...state, 
+      [i]: e.target.checked,
+    }));
+
+    if(e.target.checked) {
+      setSelectedEvent((state) => ({
+          ...state,
+          [i] : ev
+      }))
+    } else { delete selectedEvent[i] } 
+
+    //console.log('CH',selectedEvent,' IN ',ev)
+   }
+
+   const handleEventSubmit =(e) => {
+    e.preventDefault()
+    deleteEvent(selectedEvent)
+   }
 
    const handleSubmit =(e) => {
     e.preventDefault()
     deleteNews(selectedInfo)
-    setReload(true)
-    //console.log('reload')
+    
     //setSelectedRows([])
     //setSelectedInfo([])
    }
 
-   if (news.length === 0) {
+   if (news.length === 0 && togglePage) {
     return (
       <Wrapper>
         <h2>No News Article Available...</h2>
@@ -46,17 +79,24 @@ const Deletenewsitem = () => {
     )
   }
 
+
   return (
     <Wrapper>
+
     <main className='dashboard'>
       <SmallSidebar/>
       <BigSidebar/>
       <div>
-        <Navbar top='Delete News Article'/>
-        <div className='dashboard-page'>
-        </div>
+        
+      <Navbar top={togglePage ? 'Delete News Article':'Delete Event'}/>  
+      <div className='btncover'>
+      <button type="button" onClick={clear} className="btn btnpos btntoggle" >
+      {togglePage ? 'Delete Event':'Delete News Article'}
+      </button>
+      </div>
 
-        <form  onSubmit={handleSubmit}>
+{togglePage && (
+        <form  className='formcover' onSubmit={handleSubmit}>
         <div style={{margin:'20px'}}>
         {showAlert && <Alert/>}
 
@@ -76,15 +116,48 @@ const Deletenewsitem = () => {
                     
                 )})}
         
-        <button className='btn btn-block dlb' type='submit' disabled={isLoading}>
+        <button className='btn btn-block deletebutton' type='submit' disabled={isLoading}>
         {isLoading?'Please Wait.....':'DELETE'}
       </button>   
 
     </div>
     </form>
+)}
+
+
+{!togglePage && (
+  <form  className='formcover' onSubmit={handleEventSubmit}>
+        <div style={{margin:'20px'}}>
+        {showAlert && <Alert/>}
+
+        {events.length !== 0 &&    events.map((event, index) => {
+         const lk = 'E'+index
+         const lb = 'L'+index
+              return  ( 
+                <div key={lk} >
+                    <label key={lb}>
+                    <input style={{marginRight:'10px'}} type="checkbox"  name='editevent' value={event.event}
+                        checked={ iRows[index]  || false }
+                        onChange={(e)=>handleEventChange(e,event.event,index)}
+                        />
+                                              
+                      {event.event} ON {event.date}</label>
+                </div>    
+                )})}
+        
+        <button className='btn btn-block deletebutton' type='submit' disabled={isLoading}>
+        {isLoading?'Please Wait.....':'DELETE'}
+      </button>   
+
+    </div>
+    </form>
+)}
+
+
 
       </div>
     </main>
+
   </Wrapper>
   )
 }
