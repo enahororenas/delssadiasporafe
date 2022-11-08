@@ -1,19 +1,22 @@
 import React,{ useEffect } from 'react'
 import Wrapper from '../../assets/wrappers/Dash'
-import {Navbar,BigSidebar,SmallSidebar} from '../../components'
+import {Navbar,BigSidebar,SmallSidebar,Countdown} from '../../components'
 import { useAppContext } from '../../context/appContext'
 import {FaBirthdayCake} from 'react-icons/fa'
 
 
 const Dash = () => {
-  const {user,getBday,bdays,totalBday,monthly,totalMonthly} = useAppContext()
+  const {user,getBday,bdays,totalBday,monthly,totalMonthly,getEvent,events} = useAppContext()
   const currentMonth = new Date().toISOString().slice(5, 7)
   
   useEffect(()=>{
     getBday()
+    getEvent()
 },[]);
   
-  //console.log('TOT',user)
+  //console.log('TOT',events.length)
+  //events.map((ev, index) => {console.log('TOT',ev.event,index)})
+
   const uname= user.fname+' '+user.lname
 
   return (  
@@ -68,6 +71,13 @@ const Dash = () => {
     <button className="primary ghost">Favorite Teacher</button> &ensp; {user.teacher}
     </div>
     
+
+    <div>
+    { events.length > 0 && events.map((ev, index) => {return(
+        <Countdown key={index} date={ev.date} event={ev.event}/>
+        )})}
+    </div>  
+
 
     <div className="bday_parent">
     {totalBday > 0 &&
