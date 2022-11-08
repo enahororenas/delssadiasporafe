@@ -15,5 +15,6 @@ import Gallerynavbar from "./Gallerynavbar";
 import Comments from "./Comment/Comments";
 import Projectitem from "./Projectitem";
 import Dropdown from "./Dropdown";
+import Countdown from "./Countdown";
 export {Logo,FormRow,Alert,SmallSidebar,BigSidebar,Navbar,Slideshow,Gallerynavbar,Projectitem,Dropdown,
-Profilecontainer,UserInfo,SearchContainer,FormRowSelect,JobsContainer,Newsitem,Comments}
+Profilecontainer,UserInfo,SearchContainer,FormRowSelect,JobsContainer,Newsitem,Comments,Countdown}
