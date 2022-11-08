@@ -13,12 +13,13 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,DISPLAY_CUSTOM_A
     GET_NEWS_ITEM_BEGIN,GET_NEWS_ITEM_SUCCESS,GET_NEWS_ITEM_ERROR,
     GET_MEMBERS_BEGIN,GET_MEMBERS_ERROR,GET_MEMBERS_SUCCESS,
     ADD_NEW_USER_TO_REGISTER_BEGIN,ADD_NEW_USER_TO_REGISTER_SUCCESS,ADD_NEW_USER_TO_REGISTER_ERROR,
-    MAKE_ADMIN_BEGIN,MAKE_ADMIN_SUCCESS,MAKE_ADMIN_ERROR,
+    MAKE_ADMIN_BEGIN,MAKE_ADMIN_SUCCESS,MAKE_ADMIN_ERROR,GET_EVENT_SUCCESS,
     DELETE_COMMENT_BEGIN,DELETE_COMMENT_ERROR,DELETE_COMMENT_SUCCESS,
     DELETE_NEWS_ITEM_BEGIN,DELETE_NEWS_ITEM_ERROR,DELETE_NEWS_ITEM_SUCCESS,
     ADD_NEW_EXCO_BEGIN,ADD_NEW_EXCO_ERROR,ADD_NEW_EXCO_SUCCESS, GET_EXCO_BEGIN, GET_EXCO_SUCCESS, GET_EXCO_ERROR,
     ADD_PROJECT_BEGIN,ADD_PROJECT_ERROR,ADD_PROJECT_SUCCESS,GET_PROJECT_BEGIN,GET_PROJECT_ERROR,GET_PROJECT_SUCCESS,
     EDIT_PROJECT_ERROR,EDIT_PROJECT_SUCCESS,DELETE_PROJECT_ERROR,DELETE_PROJECT_SUCCESS,EDIT_PROJECT_BEGIN,DELETE_PROJECT_BEGIN,
+    ADD_EVENT_BEGIN,ADD_EVENT_ERROR,ADD_EVENT_SUCCESS,DELETE_EVENT_BEGIN,DELETE_EVENT_ERROR,DELETE_EVENT_SUCCESS,
  } from "./action";
 import reducer from "./reducer";
 import axios from 'axios'
@@ -77,13 +78,14 @@ const initialState = {
     totalExco:0,
     projects:[],
     totalProject:0,
+    events:[],
+    totalEvent:0,
 }
 
 const AppContext = React.createContext()
 //children refers to page to render
-const AppProvider = ({children}) => {
+    const AppProvider = ({children}) => {
     const [state,dispatch] = useReducer(reducer,initialState)
-
     const authFetch = axios.create({ baseURL:process.env.REACT_APP_SERVER_URL+'/api/dias'})
 
     //request
@@ -397,7 +399,8 @@ const AppProvider = ({children}) => {
         dispatch({type:DELETE_NEWS_ITEM_BEGIN})
         try {
             await authFetch.post('/news/deletenewsitem',input)
-            dispatch({type:DELETE_NEWS_ITEM_SUCCESS})    
+            dispatch({type:DELETE_NEWS_ITEM_SUCCESS})
+            getNews()    
         }catch(error){
             dispatch({type:DELETE_NEWS_ITEM_ERROR,
                 payload:{msg:error.response}
@@ -435,8 +438,6 @@ const AppProvider = ({children}) => {
                 type:GET_BDAY_SUCCESS,
                 payload:{bday,totalBday,monthly,totalMonthly}
              })
-        
-            
         }catch(error){
         }
     }
@@ -558,7 +559,38 @@ const AppProvider = ({children}) => {
         }
     }
 
-    
+    const addEvent = async(input) => {
+        dispatch({type:ADD_EVENT_BEGIN})
+        try {
+            await authFetch.post('/event/addevent',input)
+            dispatch({type:ADD_EVENT_SUCCESS})    
+        }catch(error){
+            dispatch({type:ADD_EVENT_ERROR,payload:{msg:error.response} })
+        }
+        clearAlert()
+    }
+
+    const getEvent = async() => {
+        let url =`/event/addevent`  
+        try{
+            const {data} = await authFetch.get(url)
+            const {events,totalEvents} = data 
+            dispatch({ type:GET_EVENT_SUCCESS, payload:{events,totalEvents} })
+        }catch(error){
+        }
+    }
+
+    const deleteEvent = async(input) => {       
+        dispatch({type:DELETE_EVENT_BEGIN})
+        try {
+            await authFetch.post('/event/deleteevent',input)
+            dispatch({type:DELETE_EVENT_SUCCESS})
+            getEvent()    
+        }catch(error){
+            dispatch({type:DELETE_EVENT_ERROR, payload:{msg:error.response}   })
+        }
+        clearAlert()
+    }
 
     return (
         <AppContext.Provider value={{
@@ -596,6 +628,9 @@ const AppProvider = ({children}) => {
             getProjects,
             editProject,
             deleteProject,
+            addEvent,
+            getEvent,
+            deleteEvent,
         }}>{children}</AppContext.Provider>
     )
 }
