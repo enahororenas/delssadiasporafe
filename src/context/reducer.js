@@ -17,10 +17,11 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,CHANGE_IMAGE_PAG
     CREATE_COMMENT_BEGIN,CREATE_COMMENT_ERROR,CREATE_COMMENT_SUCCESS,
     GET_COMMENT_BEGIN,GET_COMMENT_SUCCESS,GET_COMMENT_ERROR,
     DELETE_COMMENT_BEGIN,DELETE_COMMENT_ERROR,DELETE_COMMENT_SUCCESS,
-    ADD_NEW_EXCO_BEGIN,ADD_NEW_EXCO_ERROR,ADD_NEW_EXCO_SUCCESS,
+    ADD_NEW_EXCO_BEGIN,ADD_NEW_EXCO_ERROR,ADD_NEW_EXCO_SUCCESS,GET_EVENT_SUCCESS,
     GET_EXCO_BEGIN,GET_EXCO_ERROR,GET_EXCO_SUCCESS,ADD_PROJECT_BEGIN,ADD_PROJECT_ERROR,ADD_PROJECT_SUCCESS,
     GET_PROJECT_BEGIN,GET_PROJECT_ERROR,GET_PROJECT_SUCCESS,EDIT_PROJECT_BEGIN,DELETE_PROJECT_BEGIN,
     EDIT_PROJECT_ERROR,EDIT_PROJECT_SUCCESS,DELETE_PROJECT_ERROR,DELETE_PROJECT_SUCCESS,
+    ADD_EVENT_BEGIN,ADD_EVENT_ERROR,ADD_EVENT_SUCCESS,DELETE_EVENT_BEGIN,DELETE_EVENT_ERROR,DELETE_EVENT_SUCCESS,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -655,7 +656,8 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
         }
     }
 
-    if (action.type === EDIT_PROJECT_BEGIN || action.type === DELETE_PROJECT_BEGIN) {
+    if (action.type === EDIT_PROJECT_BEGIN || action.type === DELETE_PROJECT_BEGIN 
+        || action.type === ADD_EVENT_BEGIN) {
         return { ...state, isLoading: true, showAlert: false }
       }
       if (action.type === EDIT_PROJECT_SUCCESS ) {
@@ -678,7 +680,17 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
         }
       } 
 
-      if(action.type === EDIT_PROJECT_ERROR || action.type === DELETE_PROJECT_ERROR){
+      if ( action.type === ADD_EVENT_SUCCESS) {
+        return {
+          ...state,
+          isLoading: false,
+          showAlert:true,
+          alertType:'success',
+          alertText:'Event Successfully Added'
+        }
+      } 
+
+      if(action.type === EDIT_PROJECT_ERROR || action.type === DELETE_PROJECT_ERROR || action.type === ADD_EVENT_ERROR){
         return{...state,
         isLoading:false,
         showAlert:true,
@@ -686,6 +698,36 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
         alertText:action.payload.msg
         }
     }
+
+    if ( action.type === GET_EVENT_SUCCESS) {
+        return {
+          ...state,
+          events:action.payload.events,
+          totalEvent:action.payload.totalEvents,
+        }
+      }
+
+    if(action.type === DELETE_EVENT_BEGIN){
+        return{...state,isLoading:true}
+    }
+
+    if(action.type === DELETE_EVENT_SUCCESS){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'success',
+        alertText:'Successfuly Deleted Event'
+        }
+    }
+
+    if(action.type === DELETE_EVENT_ERROR){
+        return{...state,
+            isLoading:false,
+            showAlert:true,
+            alertType:'danger',
+            alertText:action.payload.msg
+        }
+    }  
 
     throw new Error(`no such action: ${action.type}`)
 }
