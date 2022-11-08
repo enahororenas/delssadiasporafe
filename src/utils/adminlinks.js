@@ -20,11 +20,11 @@ import {GrProjects} from 'react-icons/gr'
         {id:7,text:'Members',path:'/members',icon:<IoIosPeople/>},
         {id:8,text:'Chapter Projects',path:'/project',icon:<RiRefund2Line/>},
         {id:9,text:'Executive Committee',path:'/exco',icon:<IoIosPeople/>},
-        {id:10,text:'Add news Item',path:'/addnewsitem',icon:<ImNewspaper/>},
+        {id:10,text:'Add news Item/Event',path:'/addnewsitem',icon:<ImNewspaper/>},
         {id:11,text:'Add Image',path:'/addimage',icon:<ImFilePicture/>},
         {id:12,text:'Add User/Admin',path:'/adduser',icon:<FaEdit/>},
         {id:13,text:'Add/Update Project',path:'/addproject',icon:<GrProjects/>},
-        {id:14,text:'Delete News Article',path:'/deletenews',icon:<ImNewspaper/>},
+        {id:14,text:'Delete News/Event',path:'/deletenews',icon:<ImNewspaper/>},
         {id:15,text:'Add Executive Member',path:'/addexec',icon:<ImFilePicture/>},
     ]
         
