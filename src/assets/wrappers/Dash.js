@@ -105,7 +105,7 @@ button.primary.ghost {
 }
 
 .bdaycaption{
-  color:#FFDE00;
+  color: #02899C;
   font-weight: bold;
 }
 
@@ -153,6 +153,9 @@ button.primary.ghost {
   @media (min-width: 992px) {
     .buttons{
       display: none;
+    }
+    .bday_parent{
+      margin-left: 80px;
     }
 
     .nonelem{
