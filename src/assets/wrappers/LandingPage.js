@@ -28,6 +28,11 @@ const Wrapper = styled.main`
     display: none;
     
   }
+  footer {
+       position : absolute;
+       bottom: 0;
+       margin-left:10px;
+    }
   @media (min-width: 992px) {
     .page {
       grid-template-columns: 1fr 1fr;
@@ -38,11 +43,11 @@ const Wrapper = styled.main`
       display: block;
       
     }
-  }
     footer {
-       position : absolute;
-       bottom: 0;
+       margin-left:20px;
     }
+  }
+
 
 `
 export default Wrapper
