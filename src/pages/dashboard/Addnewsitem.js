@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { FormRow,Alert } from '../../components'
-//import Wrapper from '../../assets/wrappers/DashboardFormPage'
-import Wrapper from '../../assets/wrappers/GeneralSharedLayout'
+import Wrapper from '../../assets/wrappers/Addnewsitem'
 import {Navbar,BigSidebar,SmallSidebar} from '../../components'
 import { useAppContext } from '../../context/appContext'
 
@@ -10,8 +9,20 @@ const Addnewsitem = () => {
     const [newsItem, setNewsItem] = useState('');
     const [image, setPreviewSource] = useState('');
     const [selectedFile, setSelectedFile] = useState('');
-    const {showAlert,isLoading,displayAlert,addNews,customAlert} = useAppContext()
+    const {showAlert,isLoading,displayAlert,addNews,customAlert,addEvent} = useAppContext()
     const [head,setHead] = useState('')
+    const [togglePage,settogglePage] = useState(true)
+    const [event,setEvent] = useState('')
+    const [date,setDate] = useState('')
+    
+    const clear = () => {
+      setNewsItem('')
+      setHead('')
+      setEvent('')
+      setDate('')
+      setPreviewSource('')
+      settogglePage(!togglePage)
+    }
 
     const previewFile = (file) => {
       const reader = new FileReader();
@@ -28,6 +39,17 @@ const Addnewsitem = () => {
       previewFile(file);
       setSelectedFile(file);
   };
+
+  const handleSubmitEvent = (e) => {
+    e.preventDefault()
+    
+    if(!date || date === ''||!event||event===''){
+      displayAlert()
+      return
+    }
+
+    addEvent({date,event})
+  }
 
     const handleSubmit =(e) => {
         e.preventDefault()
@@ -62,10 +84,19 @@ const Addnewsitem = () => {
             <SmallSidebar/>
             <BigSidebar/>
             <div>
-              <Navbar top ='Add news Item'/>
-              <div className='dashboard-page'>
+              
+                <Navbar top={togglePage ? 'Add News Item':'Add Event'}/>
+                <div className='btncover'>
+                <button type="button" onClick={clear} className="btn btnpos btntoggle" >
+                {togglePage ? 'Add Event':'Add News Item'}
+                </button>
+                </div>
 
-    <form  onSubmit={handleSubmit}>
+
+    <div className='dashboard-page'>
+
+  {togglePage && 
+    <form  className='form form-item' onSubmit={handleSubmit}>
     {showAlert && <Alert/>}
     <div>
 
@@ -95,8 +126,30 @@ const Addnewsitem = () => {
       </button>   
 
     </div>
-    </form>
-    
+    </form>   
+  }
+
+  {!togglePage && (
+    <form  className='form form-item' onSubmit={handleSubmitEvent}>
+    {showAlert && <Alert/>}
+    <div>
+
+    <FormRow type='text' labelText='Event Title' name='event' value={event} 
+        handleChange={(e)=> setEvent(e.target.value)}/>
+
+        <div className='form-row'>
+        <label htmlFor="Event Date" className='form-label '>Event Date</label>
+        <input type="date" name="date" min={new Date().toISOString().slice(0, 10)} 
+        className='form-input formwidth' onChange={(e)=> setDate(e.target.value)}/>
+        </div>
+
+        <button className='btn btn-block' type='submit' disabled={isLoading}>
+        {isLoading?'Please Wait.....':'SUBMIT'}
+      </button>   
+
+    </div>
+    </form>      
+  )}
 
             </div>
           </div>
