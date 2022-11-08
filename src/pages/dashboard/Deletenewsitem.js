@@ -20,8 +20,8 @@ const Deletenewsitem = () => {
 
     const clear = () =>{
       setSelectedRows([])
-      setiRows([])
       setSelectedInfo([])
+      setiRows([])
       setSelectedEvent([])
       settogglePage(!togglePage)
     }
@@ -61,6 +61,8 @@ const Deletenewsitem = () => {
    const handleEventSubmit =(e) => {
     e.preventDefault()
     deleteEvent(selectedEvent)
+    setiRows([])
+    setSelectedEvent([])
    }
 
    const handleSubmit =(e) => {
