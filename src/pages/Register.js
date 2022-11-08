@@ -97,7 +97,9 @@ const Register = () => {
         handleChange={handleChange}
         ></FormRow>  
     
-        <button type='submit' className='btn btn-block' disabled={isLoading}>SUBMIT</button>
+        <button type='submit' className='btn btn-block' disabled={isLoading}>
+        {isLoading?'Please Wait.....':'SUBMIT'}
+        </button>
         
         <p>
         {values.isMember ? 'Not a member yet?':'Already a member?'}
@@ -108,7 +110,7 @@ const Register = () => {
           
         </form>
         <div>
-            <footer style={{bottom:'0',position:'fixed'}}>© EE 2022</footer>
+            <footer className='foot'>© EE 2022</footer>
           </div>
       </Wrapper>
     )
