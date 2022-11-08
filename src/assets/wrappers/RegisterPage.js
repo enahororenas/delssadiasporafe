@@ -32,5 +32,17 @@ const Wrapper = styled.section`
     cursor: pointer;
     letter-spacing: var(--letterSpacing);
   }
+  .foot{
+    bottom:0;
+    position:fixed;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 992px) {
+    .foot{
+      margin-left: 10px;
+      position:static;
+    }
+  }
 `
 export default Wrapper
