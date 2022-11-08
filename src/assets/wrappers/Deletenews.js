@@ -2,23 +2,18 @@ import styled from 'styled-components'
 
 
 const Wrapper = styled.section`
-.dlb{
+.deletebutton{
   width:fit-content;
   background-color:red;
+  margin-top: 20px;
 }
-.db1 {
-      display: grid;
-      place-items: center;
-      //background-color: #2196F3;
-      margin-bottom: 50px;
-    }
+.formcover{
+  margin-top: -20px;
+}
 
-   .db2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: #2196F3;
-  }
-
+ .btntoggle{
+  margin: 20px;
+ }
   .db3{
     margin-left: 20px;
   }
