@@ -22,6 +22,7 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,CHANGE_IMAGE_PAG
     GET_PROJECT_BEGIN,GET_PROJECT_ERROR,GET_PROJECT_SUCCESS,EDIT_PROJECT_BEGIN,DELETE_PROJECT_BEGIN,
     EDIT_PROJECT_ERROR,EDIT_PROJECT_SUCCESS,DELETE_PROJECT_ERROR,DELETE_PROJECT_SUCCESS,
     ADD_EVENT_BEGIN,ADD_EVENT_ERROR,ADD_EVENT_SUCCESS,DELETE_EVENT_BEGIN,DELETE_EVENT_ERROR,DELETE_EVENT_SUCCESS,
+    SEND_CODE_BEGIN,SEND_CODE_ERROR,SEND_CODE_SUCCESS,VAL_PIN_BEGIN,VAL_PIN_ERROR,VAL_PIN_SUCCESS,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -51,7 +52,6 @@ const reducer = (state,action) => {
         alertText:''
         }
     }
-
     
     if(action.type === SETUP_USER_BEGIN){
         return{...state,
@@ -727,7 +727,38 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
             alertType:'danger',
             alertText:action.payload.msg
         }
-    }  
+    }
+    
+    if(action.type === SEND_CODE_BEGIN || action.type === VAL_PIN_BEGIN){
+        return{...state,isLoading:true}
+    }
+
+    if(action.type === SEND_CODE_SUCCESS){ 
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'success',
+        alertText:'Successfuly sent recovery email'
+        }
+    }
+
+    if(action.type === SEND_CODE_ERROR||action.type===VAL_PIN_ERROR){
+        return{...state,
+            isLoading:false,
+            showAlert:true,
+            alertType:'danger',
+            alertText:action.payload.msg
+        }
+    }
+
+    if(action.type === VAL_PIN_SUCCESS){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'success',
+        alertText:'Password Reset Complete'
+        }
+    }
 
     throw new Error(`no such action: ${action.type}`)
 }
