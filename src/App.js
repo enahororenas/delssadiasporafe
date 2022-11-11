@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import {Register, Landing, Error,ProtectedRoute} from './pages'
+import {Register, Landing, Error,ProtectedRoute,Reset} from './pages'
 import {Profile,Dash,About,Contact,News,Gallery,Addleader,Leadership,Project,Addproject,
   Addnewimage,Addnewsitem,Members,Adduser,Deletenewsitem} from './pages/dashboard'
 
@@ -10,11 +10,12 @@ function App() {
     <BrowserRouter>
       <Routes>
       <Route path='/' element={<Landing/>}/>
+      <Route path='/register' element={<Register/>}/>
+      <Route path='/reset' element={<Reset/>}/>
       <Route path='/project' element={<ProtectedRoute><Project/></ProtectedRoute>}/>
       <Route path='/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
       <Route path='/user' element={<ProtectedRoute><Dash/></ProtectedRoute>}/>
       <Route path='/about' element={<ProtectedRoute><About/></ProtectedRoute>}/>
-      <Route path='/register' element={<Register/>}/>
       <Route path='/contact' element={<ProtectedRoute><Contact/></ProtectedRoute>}/>
       <Route path='/news' element={<ProtectedRoute><News/></ProtectedRoute>}/>
       <Route path='/gallery' element={<ProtectedRoute><Gallery/></ProtectedRoute>}/>
