@@ -14,7 +14,7 @@ const Profile = () => {
 
   //const [backB, setBackB] = useState('');
 
-  const [email,setEmail] = useState(user.email||'')
+  
   const [lname,setLastName] = useState(user.lname||'')
   const [fname,setFirstName] = useState(user.fname||'')
   const [location,setLocation] = useState(user.location||'')
@@ -60,11 +60,11 @@ const Profile = () => {
 
   const handleSubmit =(e) => { 
     e.preventDefault()
-    if(!email||!fname||!lname||!location||!occupation||!house||!teacher||!subject||!yog||!bday){
+    if(!fname||!lname||!location||!occupation||!house||!teacher||!subject||!yog||!bday){
       displayAlert()
       return
     }
-    updateUser({ fname,lname, email, location,occupation,house,teacher,subject,yog,bday })
+    updateUser({ fname,lname, location,occupation,house,teacher,subject,yog,bday })
     }
 
   const handleSubmit2 = (e) => {
@@ -100,9 +100,6 @@ const Profile = () => {
         
         <FormRow type='text' labelText='Last Name' name='lname' value={lname} 
         handleChange={(e)=> setLastName(e.target.value)}/>
-
-        <FormRow type='email' name='email' value={email} 
-        handleChange={(e)=> setEmail(e.target.value)}/>
 
         <FormRow type='text' name='location' value={location} 
         handleChange={(e)=> setLocation(e.target.value)}/>
