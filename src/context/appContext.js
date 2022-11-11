@@ -20,19 +20,17 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,DISPLAY_CUSTOM_A
     ADD_PROJECT_BEGIN,ADD_PROJECT_ERROR,ADD_PROJECT_SUCCESS,GET_PROJECT_BEGIN,GET_PROJECT_ERROR,GET_PROJECT_SUCCESS,
     EDIT_PROJECT_ERROR,EDIT_PROJECT_SUCCESS,DELETE_PROJECT_ERROR,DELETE_PROJECT_SUCCESS,EDIT_PROJECT_BEGIN,DELETE_PROJECT_BEGIN,
     ADD_EVENT_BEGIN,ADD_EVENT_ERROR,ADD_EVENT_SUCCESS,DELETE_EVENT_BEGIN,DELETE_EVENT_ERROR,DELETE_EVENT_SUCCESS,
+    SEND_CODE_BEGIN,SEND_CODE_ERROR,SEND_CODE_SUCCESS,VAL_PIN_BEGIN,VAL_PIN_ERROR,VAL_PIN_SUCCESS,
  } from "./action";
 import reducer from "./reducer";
 import axios from 'axios'
+
 
 
 const token = localStorage.getItem('token')
 const user = localStorage.getItem('user')
 const userLocation = localStorage.getItem('location')
 
-
-//const token = null
-//const user = null
-//const userLocation = ''
 
 const initialState = {
     isLoading:false,
@@ -126,7 +124,6 @@ const AppContext = React.createContext()
     const clearAlert = () => { 
         setTimeout(()=>{ dispatch({type:CLEAR_ALERT})},3000)
     }
-
     
     const addUserToLocalStorage = ({email,token,location}) => {
        localStorage.setItem('email',JSON.stringify(email))
@@ -145,21 +142,14 @@ const AppContext = React.createContext()
         //console.log('LOGIN CURRENT FUNC',currentUser,endPoint,process.env.REACT_APP_SERVER_URL)     
         
         dispatch({type:SETUP_USER_BEGIN}) 
-
         try{
             const {data} = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/dias/auth/${endPoint}`,currentUser)
-        
             const{user,token,location,uid} = data
-            
-            //console.log('CURR USERS TOKEN',user,'AND DATA',data)
-
             dispatch({
                 type:SETUP_USER_SUCCESS,
                 payload:{user,token,location,alertText,uid}
             })     
-
            addUserToLocalStorage({user,token,location})
- 
         }catch(error){
             //console.log('REG ERROR',error.response)
             dispatch({
@@ -167,13 +157,42 @@ const AppContext = React.createContext()
               payload:{msg:error.response.data.msg}
             })
         }
-
         clearAlert()
     }
 
     const toggleSidebar = () => {
-        //console.log('CLICKED TOGGLE BUTTON')
         dispatch({type:TOGGLE_SIDE_BAR})
+    }
+
+    const valToken = async(input) => {
+        dispatch({type:VAL_PIN_BEGIN})  
+        try {
+            await authFetch.post('/auth/valpassword',input) 
+            dispatch({type:VAL_PIN_SUCCESS})  
+            clearAlert()  
+            return true
+          } catch (error) {
+                dispatch({type:VAL_PIN_ERROR,
+                payload:{msg:error.response.data.msg}
+                })
+                clearAlert()  
+                return false      
+          }
+    }
+    const sendCode = async(email) => {
+        dispatch({type:SEND_CODE_BEGIN})  
+        try {
+            await authFetch.post('/auth/forgotpassword',email) 
+            dispatch({type:SEND_CODE_SUCCESS})  
+            clearAlert()  
+            return true
+          } catch (error) {
+                dispatch({type:SEND_CODE_ERROR,
+                payload:{msg:error.response.data.msg}
+                }) 
+                clearAlert()  
+                return false
+          }
     }
 
     
@@ -631,6 +650,8 @@ const AppContext = React.createContext()
             addEvent,
             getEvent,
             deleteEvent,
+            sendCode,
+            valToken,
         }}>{children}</AppContext.Provider>
     )
 }
