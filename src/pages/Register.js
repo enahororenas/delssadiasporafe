@@ -13,6 +13,7 @@ const initialState = {
 }
 
 const Register = () => {
+    const [reset,setReset] = useState(false)
     const [values,setValues] = useState(initialState)
     const {user,isLoading,showAlert,displayAlert,setupUser} = useAppContext()
     const navigate = useNavigate()
@@ -21,6 +22,8 @@ const Register = () => {
     //console.log('Toggle clicked')
     setValues({...values,isMember:!values.isMember})
   }
+
+
   
     const handleChange =(e) =>{
       setValues({...values,[e.target.name]:e.target.value})
@@ -41,7 +44,8 @@ const Register = () => {
         return
       }
       
-      const currentUser = {fname,lname,email,password}
+      const currentUser = {fname,lname,email:email.toLowerCase(),password}
+      
       if (isMember){
         setupUser({currentUser,endPoint:'login',alertText:'Login sccessfully. Redirecting to Dashboard!'})
       } else {
@@ -52,7 +56,8 @@ const Register = () => {
     useEffect(() => {
       //console.log('USE EFFECT',user)
       if(user){setTimeout(() => {navigate('/user')},1000)}
-    },[user,navigate])
+      if(reset){setTimeout(() => {navigate('/reset')},1000)}
+    },[user,navigate,reset])
   
 
     return (
@@ -107,6 +112,12 @@ const Register = () => {
           {values.isMember ? 'Register':'Login'}
           </button>
         </p>
+
+        {values.isMember  &&
+        <p>Forgot password?  
+        <button type="button" onClick={(e)=> setReset(!reset)} className="member-btn">Reset password</button>
+          </p>
+        }
           
         </form>
         <div>
