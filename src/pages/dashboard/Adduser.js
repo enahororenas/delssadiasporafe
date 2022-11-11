@@ -31,9 +31,9 @@ const Adduser = () => {
       }
       
       if(addToDB){
-        addNewUserToDB({ fname,lname, email })
+        addNewUserToDB({ fname,lname, email:email.toLowerCase() })
       } else {
-        makeAUserAdmin({email})
+        makeAUserAdmin({email:email.toLowerCase()})
       }
       setValues({...values,fname:'',lname:'',email:''})
     }
