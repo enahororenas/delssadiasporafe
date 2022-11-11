@@ -164,7 +164,7 @@ const AppContext = React.createContext()
             //console.log('REG ERROR',error.response)
             dispatch({
                type:SETUP_USER_ERROR,
-              payload:{msg:error.response}
+              payload:{msg:error.response.data.msg}
             })
         }
 
@@ -193,7 +193,7 @@ const AppContext = React.createContext()
             addUserToLocalStorage(user,location,token)
         }catch(error){
             dispatch({type:UPDATE_USER_IMAGE_ERROR,
-                payload:{msg:error.message}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()  
@@ -279,7 +279,7 @@ const AppContext = React.createContext()
         })    
     }catch(error){
         dispatch({type:GET_PROJECT_ERROR,
-            payload:{msg:error.response}
+            payload:{msg:error.response.data.msg}
             })
     }
     clearAlert()
@@ -294,7 +294,7 @@ const AppContext = React.createContext()
             getProjects()
         } catch(error){
         dispatch({type:EDIT_PROJECT_ERROR,
-            payload:{msg:error.response}
+            payload:{msg:error.response.data.msg}
             })
         }
         clearAlert()
@@ -309,7 +309,7 @@ const AppContext = React.createContext()
             getProjects()
         } catch(error){
         dispatch({type:DELETE_PROJECT_ERROR,
-            payload:{msg:error.response}
+            payload:{msg:error.response.data.msg}
             })
         }
         clearAlert()
@@ -322,7 +322,7 @@ const AppContext = React.createContext()
             dispatch({type:ADD_NEW_EXCO_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEW_EXCO_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -339,7 +339,7 @@ const AppContext = React.createContext()
         })    
         }catch(error){
             dispatch({type:GET_EXCO_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -355,7 +355,7 @@ const AppContext = React.createContext()
             dispatch({type:ADD_NEW_IMAGE_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEW_IMAGE_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -375,7 +375,7 @@ const AppContext = React.createContext()
         }catch(error){
             //console.log(error.response)
             dispatch({type:GET_IMAGES_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
     
@@ -389,7 +389,7 @@ const AppContext = React.createContext()
             dispatch({type:ADD_NEWS_ITEM_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEWS_ITEM_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -403,7 +403,7 @@ const AppContext = React.createContext()
             getNews()    
         }catch(error){
             dispatch({type:DELETE_NEWS_ITEM_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert() 
@@ -421,7 +421,7 @@ const AppContext = React.createContext()
             })
         }catch(error){
             dispatch({type:GET_NEWS_ITEM_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -462,7 +462,7 @@ const AppContext = React.createContext()
             })
         }catch(error){
             dispatch({type:GET_MEMBERS_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -475,7 +475,7 @@ const AppContext = React.createContext()
             dispatch({type:ADD_NEW_USER_TO_REGISTER_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEW_USER_TO_REGISTER_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -491,7 +491,7 @@ const AppContext = React.createContext()
             })    
         }catch(error){
             dispatch({type:MAKE_ADMIN_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         }
         clearAlert()
@@ -524,7 +524,7 @@ const AppContext = React.createContext()
             })
         }catch(error){
             dispatch({type:GET_COMMENT_ERROR,
-                payload:{msg:error.response}
+                payload:{msg:error.response.data.msg}
                 })
         } 
         clearAlert()   
@@ -565,7 +565,7 @@ const AppContext = React.createContext()
             await authFetch.post('/event/addevent',input)
             dispatch({type:ADD_EVENT_SUCCESS})    
         }catch(error){
-            dispatch({type:ADD_EVENT_ERROR,payload:{msg:error.response} })
+            dispatch({type:ADD_EVENT_ERROR,payload:{msg:error.response.data.msg} })
         }
         clearAlert()
     }
@@ -587,7 +587,7 @@ const AppContext = React.createContext()
             dispatch({type:DELETE_EVENT_SUCCESS})
             getEvent()    
         }catch(error){
-            dispatch({type:DELETE_EVENT_ERROR, payload:{msg:error.response}   })
+            dispatch({type:DELETE_EVENT_ERROR, payload:{msg:error.response.data.msg}   })
         }
         clearAlert()
     }
