@@ -14,7 +14,15 @@ const Wrapper = styled.section`
   align-items: center;
 }
 
-
+.caption{
+  text-align: center;
+}
+.pcaption{
+  max-width: none;
+  margin-bottom: none;
+  color: var(--primary-500);
+  font-size: medium;
+}
 .mainImg {
     width:  750px;
     height: 700px;
