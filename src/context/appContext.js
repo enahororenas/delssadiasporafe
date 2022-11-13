@@ -368,9 +368,8 @@ const AppContext = React.createContext()
 
     const addImage = async(input) => {
         dispatch({type:ADD_NEW_IMAGE_BEGIN})
-        const{image} = input
         try {
-            await authFetch.post('/gallery/addimage',{image})
+            await authFetch.post('/gallery/addimage',input)
             dispatch({type:ADD_NEW_IMAGE_SUCCESS})    
         }catch(error){
             dispatch({type:ADD_NEW_IMAGE_ERROR,
@@ -386,7 +385,6 @@ const AppContext = React.createContext()
         try{
             const {data} = await authFetch.get(url)
             const {urls,totalUrls,numOfImagePage} = data
-            //console.log('RETURNED',numOfImagePage)
             dispatch({
                 type:GET_IMAGES_SUCCESS,
                 payload:{urls,totalUrls,numOfImagePage}
