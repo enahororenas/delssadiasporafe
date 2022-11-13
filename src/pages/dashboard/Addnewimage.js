@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
-import { Alert } from '../../components'
-import Wrapper from '../../assets/wrappers/GeneralSharedLayout'
+import { FormRow,Alert } from '../../components'
+import Wrapper from '../../assets/wrappers/Addimage'
 import {Navbar,BigSidebar,SmallSidebar} from '../../components'
 import { useAppContext } from '../../context/appContext'
 
 const Addnewimage = () => {
   const [selectedFile, setSelectedFile] = useState([]);
     const [allImages, setAllImages] = useState([]);
-    const {showAlert,isLoading,displayAlert,customAlert,user,addImage} = useAppContext()
+    const [caption, setCaption] = useState('')
+    const {showAlert,isLoading,displayAlert,customAlert,addImage} = useAppContext()
 
     const clearArray=(e)=>{
       e.preventDefault()
@@ -48,12 +49,7 @@ const Addnewimage = () => {
             }
           }  
             
-          const image = {
-            data:allImages,
-            id: user.uid
-          }
-
-          addImage({image})
+          addImage({allImages,caption})
           setSelectedFile([])
           setAllImages([])
       }
@@ -67,12 +63,15 @@ const Addnewimage = () => {
               <Navbar top ='Add New Image To Gallery'/>
               <div className='dashboard-page'>
 
-    <form className='form' onSubmit={handleSubmit}>
+    <form className='form form-item' onSubmit={handleSubmit}>
     {showAlert && <Alert/>}
     <div className='form-center'>
 
         <div className='form-row'>
-          <label htmlFor='image' className='form-label'>Add Image to Gallery</label>
+
+        <FormRow type='text' labelText='Caption' name='caption' value={caption} 
+        handleChange={(e)=> setCaption(e.target.value)}/>
+        <p className='form-label'>Select Image/Images</p>
           <input type='file' name='image' value={""} onClick={e => (e.target.value = null)} onChange={handleFileInputChange} className='form-input' multiple></input>
         </div>
 
