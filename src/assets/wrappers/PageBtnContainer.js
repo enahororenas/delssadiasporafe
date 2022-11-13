@@ -50,5 +50,9 @@ const Wrapper = styled.section`
     background: var(--primary-500);
     color: var(--white);
   }
+
+  .dummy{
+    margin-right: 20px;
+  }
 `
 export default Wrapper
