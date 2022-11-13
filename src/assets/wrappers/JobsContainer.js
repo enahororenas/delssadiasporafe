@@ -30,7 +30,7 @@ const Wrapper = styled.section`
   @media (min-width: 992px) {
     .jobs {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 1rem;
       margin-left: 40px;
     }
