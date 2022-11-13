@@ -88,7 +88,7 @@ const Wrapper = styled.section`
       margin-left: 40px;
     }
     .team-members-item {
-    max-width: 60%;
+    max-width: 93%;
     max-height: 50%;
     }
     .image-container{
