@@ -24,19 +24,23 @@ const Slideshow = ({ imgs }) => {
         updateGlobalIndex(commentIndex - 1)
       }
     }
+
+    
     
     return (
     <Wrapper>
     <div className="slideshow">
 
       <div className='allimgp'>
-      <img className="mainImg" src={imgs[commentIndex]} alt=''/>
-      
+      <img className="mainImg" src={imgs[commentIndex].url} alt=''/>
       <div className="actions">
         <button className='leftbtn' onClick={prev}>👈</button>
         <button className='rightbtn' onClick={next}>👉</button>
       </div>
+      </div>
 
+      <div className='caption'>
+      <p className='pcaption'>{imgs[commentIndex].caption}</p>
       </div>
       
       <div className='thumbDiv'>
@@ -47,7 +51,7 @@ const Slideshow = ({ imgs }) => {
         {numOfImagePage > 1 && <ImageBtnContainer/>}
         </div>
       <div className='lowerBody'>
-      <Comments url={imgs[commentIndex]}/>
+      <Comments url={imgs[commentIndex].url}/>
       </div>
     </div>
       </Wrapper>
