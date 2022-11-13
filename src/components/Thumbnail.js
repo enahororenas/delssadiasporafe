@@ -15,7 +15,7 @@ const update =(i)=>{
           <img
             key={i}
             height="50"
-            src={imgsrc}
+            src={imgsrc.url}
             onClick={() => update(i)}
             className={index === i ? 'active' : ''}
             alt=''
