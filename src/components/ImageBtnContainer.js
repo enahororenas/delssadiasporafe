@@ -33,6 +33,7 @@ const ImageBtnContainer = () => {
 
   return (
     <Wrapper>
+      
       <button className='prev-btn' onClick={prevPage}>
         <HiChevronDoubleLeft />
         prev
@@ -55,6 +56,7 @@ const ImageBtnContainer = () => {
         next
         <HiChevronDoubleRight />
       </button>
+      <div className='dummy'></div>
     </Wrapper>
   )
 }
