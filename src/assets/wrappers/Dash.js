@@ -66,18 +66,22 @@ p {
   position: relative;
   max-width: 100%;
   height: 100%;
-  z-index: -1;
   text-align: center;
 }
 
 .card-container .round {
   border: 1px solid #03BFCB;
-  border-radius: 50%;
   padding: 7px;
   width: 300px;
   height: 300px;
   border-radius: 50px;
 }
+
+.round:hover {
+  transition: transform 2s, filter 1.5s ease-in-out;
+  transform: scale(1.06);
+}
+
 .bday_parent{
   text-align: left;
   margin-left: 10px;
