@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.nav`
-  height: var(--nav-height);
+  height: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +16,7 @@ const Wrapper = styled.nav`
     width: 90vw;
     align-items: center;
     justify-content: space-between;
+    margin-top: -20px;
   }
   .toggle-btn {
     background: transparent;
@@ -41,7 +42,7 @@ const Wrapper = styled.nav`
 
   .dropdown {
     position: absolute;
-    top: 40px;
+    top: 35px;
     left: 0;
     width: 100%;
     background: var(--primary-100);
