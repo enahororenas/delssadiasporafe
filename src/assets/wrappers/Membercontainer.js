@@ -84,7 +84,7 @@ const Wrapper = styled.section`
 @media (min-width: 992px) {
     .details {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      //grid-template-columns: 1fr 1fr;
       margin-left: 40px;
     }
     .team-members-item {
