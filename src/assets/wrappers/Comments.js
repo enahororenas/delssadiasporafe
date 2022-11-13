@@ -20,7 +20,7 @@ const Wrapper = styled.section`
   }
   
   .comment-form-textarea {
-    width: 100%;
+    width: 90%;
     height: 80px;
     margin-bottom: 8px;
     margin-top: 8px;
@@ -103,5 +103,12 @@ const Wrapper = styled.section`
   .replies {
     margin-top: 20px;
   }
+
+  @media only screen and (min-width: 998px) {
+    .comment-form-textarea {
+    width: 70%;
+    }
+  }
+
   `
 export default Wrapper
