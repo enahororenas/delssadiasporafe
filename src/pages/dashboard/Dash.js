@@ -3,21 +3,29 @@ import Wrapper from '../../assets/wrappers/Dash'
 import {Navbar,BigSidebar,SmallSidebar,Countdown} from '../../components'
 import { useAppContext } from '../../context/appContext'
 import {FaBirthdayCake} from 'react-icons/fa'
+import BellIcon from '../../components/Bellicon'
+import { useNavigate } from 'react-router-dom'
 
 
 const Dash = () => {
-  const {user,getBday,bdays,totalBday,monthly,totalMonthly,getEvent,events} = useAppContext()
+  const {user,getBday,bdays,totalBday,monthly,totalMonthly,getEvent,events,totalNews,getNews,
+    updateRead} = useAppContext()
   const currentMonth = new Date().toISOString().slice(5, 7)
+  const navigate = useNavigate()
+useEffect(()=>{
+  getBday()
+  getEvent()
+  getNews()  
+},[totalNews]);
   
-  useEffect(()=>{
-    getBday()
-    getEvent()
-},[]);
-  
-  //console.log('TOT',events.length)
   //events.map((ev, index) => {console.log('TOT',ev.event,index)})
 
   const uname= user.fname+' '+user.lname
+
+  const handleclick = ()=> {
+    updateRead({totalNews})
+    navigate('/news')
+  }
 
   return (  
     <Wrapper>
@@ -27,11 +35,23 @@ const Dash = () => {
         <BigSidebar/>
           <div>
             
-
            <Navbar top='Dashboard'/>
            <div className="card-container">
             {user.admin && <span className="pro">ADMIN</span>}
-              <img className="round" src={user.image}  alt="user"/>
+            
+            <div className='bell'>
+            {totalNews !== user.read ? 
+            <BellIcon width='32' handleclick={handleclick} active={true} color={'#FF0000'} />     
+            :
+            <BellIcon width='32' handleclick={handleclick} active={true} color={'#02899C'} />     
+            }
+            
+            </div>
+
+            <div className='image-height'>
+            <img className="round" src={user.image}  alt="user"/>
+            </div>
+              
               <h3 style={{marginBottom:'30px'}}>{uname}</h3>
             
         
