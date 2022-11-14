@@ -37,6 +37,21 @@ p {
   line-height: 21px;
 }
 
+.bell{
+  float:right;
+  margin-right: 20px;
+}
+.card-container .pro {
+      color: #231E39;
+      background-color: #FEBB0B;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 3px 7px;
+      position: absolute;
+      top: 30px;
+      left: 30px;
+    }
 .disp-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -161,10 +176,10 @@ button.primary.ghost {
     .bday_parent{
       margin-left: 80px;
     }
-
-    .nonelem{
-     // margin-left: -100px;
+    .bell{
+      margin-right: 30px;
     }
+    
     .nonebdy{
       justify-self: start;
     }
@@ -181,22 +196,14 @@ button.primary.ghost {
       width: 400px;
       height: 400px;
     }
-    .card-container .pro {
-      color: #231E39;
-      background-color: #FEBB0B;
-      border-radius: 3px;
-      font-size: 14px;
-      font-weight: bold;
-      padding: 3px 7px;
-      position: absolute;
-      top: 30px;
-      left: 30px;
-    }
+
   }
   @media (max-width: 992px) {                  
-    .card-container .pro {
-      display: none;
+   .image-height{
+    margin-top: 50px;
    }
+
+
    .disp-grid {
     display: none;
     }
