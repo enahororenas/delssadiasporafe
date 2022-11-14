@@ -41,7 +41,7 @@ useEffect(()=>{
             
             <div className='bell'>
             {totalNews !== user.read ? 
-            <BellIcon width='32' handleclick={handleclick} active={true} color={'#FF0000'} />     
+            <BellIcon width='32' handleclick={handleclick} active={true} animate={true} color={'#FF0000'} />     
             :
             <BellIcon width='32' handleclick={handleclick} active={true} color={'#02899C'} />     
             }
