@@ -3,7 +3,7 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,DISPLAY_CUSTOM_A
     SETUP_USER_BEGIN,SETUP_USER_SUCCESS,SETUP_USER_ERROR,CLEAR_VALUES,CLEAR_FILTERS,
     UPDATE_USER_BEGIN,UPDATE_USER_SUCCESS,UPDATE_USER_ERROR,HANDLE_CHANGE,CHANGE_PAGE,
     SEND_EMAIL_SUCCESS,SEND_EMAIL_BEGIN,SEND_EMAIL_ERROR,UPDATE_GLOBAL_COUNT,
-    ADD_NEW_IMAGE_BEGIN,ADD_NEW_IMAGE_SUCCESS,ADD_NEW_IMAGE_ERROR,
+    ADD_NEW_IMAGE_BEGIN,ADD_NEW_IMAGE_SUCCESS,ADD_NEW_IMAGE_ERROR,READ_UPDATE_SUCCESS,
     ADD_NEWS_ITEM_BEGIN,ADD_NEWS_ITEM_SUCCESS,ADD_NEWS_ITEM_ERROR,
     CREATE_COMMENT_BEGIN,CREATE_COMMENT_ERROR,CREATE_COMMENT_SUCCESS,
     GET_COMMENT_BEGIN,GET_COMMENT_SUCCESS,GET_COMMENT_ERROR,CHANGE_IMAGE_PAGE,
@@ -53,7 +53,7 @@ const initialState = {
     totalBday:0,
     monthly:[],
     totalMonthly:0,
-    totalNews:1,
+    totalNews:0,
     numOfPages:1,
     page:1,
     imagePage:1,
@@ -148,7 +148,7 @@ const AppContext = React.createContext()
             dispatch({
                 type:SETUP_USER_SUCCESS,
                 payload:{user,token,location,alertText,uid}
-            })     
+            })  
            addUserToLocalStorage({user,token,location})
         }catch(error){
             //console.log('REG ERROR',error.response)
@@ -609,6 +609,19 @@ const AppContext = React.createContext()
         clearAlert()
     }
 
+    const updateRead = async(input) => {
+        let url =`/user/updatenotification`  
+        try{
+            const {data} = await authFetch.post(url,input)
+            const {user} = data
+            dispatch({
+                type:READ_UPDATE_SUCCESS,
+                payload:{user}
+            }) 
+        }catch(error){
+        }
+    }
+
     return (
         <AppContext.Provider value={{
             ...state,
@@ -650,6 +663,7 @@ const AppContext = React.createContext()
             deleteEvent,
             sendCode,
             valToken,
+            updateRead,
         }}>{children}</AppContext.Provider>
     )
 }
