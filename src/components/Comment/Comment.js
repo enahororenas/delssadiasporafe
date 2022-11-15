@@ -65,7 +65,9 @@ const Comment = ({comment,replies,setActiveComment,activeComment,updateComment,d
           {isReplying && (
             <CommentForm
               submitLabel="Reply"
+              hasCancelButton
               handleSubmit={(text) => addComment(text, replyId)}
+              handleCancel={() => {  setActiveComment(null); }}
             />
           )}
           {replies.length > 0 && (
