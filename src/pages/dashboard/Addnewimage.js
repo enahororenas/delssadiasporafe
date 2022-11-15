@@ -36,7 +36,7 @@ const Addnewimage = () => {
       const handleSubmit =(e) => {
         e.preventDefault()
         
-        if(!selectedFile){
+        if(!selectedFile ||!caption ||caption ===''){
             displayAlert()
             return
           }
