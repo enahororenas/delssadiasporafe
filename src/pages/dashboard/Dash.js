@@ -40,11 +40,12 @@ useEffect(()=>{
             {user.admin && <span className="pro">ADMIN</span>}
             
             <div className='bell'>
-            {totalNews !== user.read ? 
-            <BellIcon width='32' handleclick={handleclick} active={true} animate={true} color={'#FF0000'} />     
+            {totalNews && user.read && (
+            totalNews === user.read ? 
+            <BellIcon width='32' handleclick={handleclick} active={true} color={'#02899C'} />          
             :
-            <BellIcon width='32' handleclick={handleclick} active={true} color={'#02899C'} />     
-            }
+            <BellIcon width='32' handleclick={handleclick} active={true} animate={true} color={'#FF0000'} />
+            )}
             
             </div>
 
