@@ -2,9 +2,10 @@ import React,{useEffect} from 'react'
 import Wrapper from '../../assets/wrappers/Projects'
 import {Navbar,BigSidebar,SmallSidebar,Projectitem} from '../../components'
 import { useAppContext} from '../../context/appContext'
+import Loading from '../../components/Loading'
 
 const Project = () => {
-const {getProjects,projects,totalProject} = useAppContext()
+const {getProjects,projects,totalProject,isLoading} = useAppContext()
   useEffect(()=>{
     getProjects()
    },[totalProject])
@@ -12,6 +13,8 @@ const {getProjects,projects,totalProject} = useAppContext()
    const Convert = (value) => {
     return parseFloat(value)
    }
+
+   if(isLoading){return <Loading center/>}
 
   return (
     <Wrapper>
