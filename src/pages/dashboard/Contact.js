@@ -1,20 +1,15 @@
 import React,{useState} from 'react'
 import Wrapper from '../../assets/wrappers/Contactus'
 import {Navbar,BigSidebar,SmallSidebar} from '../../components'
-import { FormRow,Alert } from '../../components'
+import { Alert } from '../../components'
 import { useAppContext } from '../../context/appContext'
 import {FaYoutube,FaInstagram} from 'react-icons/fa'
 
-const initialState = {
-    fname:'',
-    lname:'',
-    email:'',
-    message:'',
-  }
+const initialState = {message:''}
 
 const Contact = () => {
+  const {showAlert,displayAlert,isLoading,sendEmail,customAlert,user} = useAppContext()
     const [values,setValues] = useState(initialState)
-    const {showAlert,displayAlert,isLoading,sendEmail} = useAppContext()
   
     const handleChange =(e) =>{
       setValues({...values,[e.target.name]:e.target.value})
@@ -27,14 +22,19 @@ const Contact = () => {
 
     const handleSubmit =(e) => {
         e.preventDefault()
-        const {fname,lname,email,message} = values
+        const {message} = values
         
-         if(!email||!fname||!lname||!message||message.length>200){
+         if(!message){
             displayAlert()
             return
           }
 
-         sendEmail({ fname,lname, email, message })
+          if(message.length>500){
+            customAlert("Message must be 500 characters or less")
+            return
+          }
+          
+         sendEmail({ fname:user.fname,lname:user.lname, email:user.email, message })
          setValues({ ...initialState })
     }
 
@@ -51,14 +51,21 @@ const Contact = () => {
               <form className='form' onSubmit={handleSubmit}>
                 {showAlert && <Alert/>}
                     <div className='form-center'>
-                        <FormRow type='text' labelText='First Name' name='fname' value={values.fname} 
-                            handleChange={handleChange}/>
-        
-                        <FormRow type='text' labelText='Last Name' name='lname' value={values.lname} 
-                            handleChange={handleChange}/>
+                    
+              <div className='form-row'>
+                <label htmlFor='fname' className='form-label'>First Name</label>
+                <input type='text' value={user.fname} name='fname' className='form-input' readOnly/>
+              </div>
 
-                        <FormRow type='email' name='email' value={values.email} 
-                            handleChange={handleChange}/>
+              <div className='form-row'>
+                <label htmlFor='lname' className='form-label'>Last Name</label>
+                <input type='text' value={user.lname} name='lname' className='form-input' readOnly/>
+              </div>
+
+              <div className='form-row'>
+                <label htmlFor='email' className='form-label'>Email</label>
+                <input type='email' value={user.email} name='email' className='form-input' readOnly/>
+              </div>
 
         <p>Message must be 500 characters or less</p>
         <div>
