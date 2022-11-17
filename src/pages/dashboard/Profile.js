@@ -64,7 +64,7 @@ const Profile = () => {
       displayAlert()
       return
     }
-    updateUser({ fname,lname, location,occupation,house,teacher,subject,yog,bday })
+    updateUser({ fname,lname, location,occupation,house,teacher,subject,yog,bday,email:user.email })
     }
 
   const handleSubmit2 = (e) => {
