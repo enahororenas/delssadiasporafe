@@ -38,6 +38,25 @@ const Wrapper = styled.section`
     margin-left: 20px;
   }
 
+.flexContainer {
+    display: flex;
+    border: 1px solid var(--grey-200);
+    border-radius: var(--borderRadius);
+  }
+
+.inputMain {
+  /* Tell the input to use all the available space */
+  flex-grow:2;
+  /* And hide the input's outline, so the form looks like the outline */
+  border:none;
+}
+
+.showbutton{    
+  background: var(--backgroundColor);
+  border: none;
+  }
+
+
   @media (max-width: 992px) {
     .foot{
       margin-left: 10px;
