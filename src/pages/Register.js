@@ -1,7 +1,7 @@
 import React,{ useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Wrapper from '../assets/wrappers/RegisterPage'
-import { FormRow, Alert } from '../components'
+import { Alert } from '../components'
 import { useAppContext} from '../context/appContext'
 import { FaEyeSlash } from 'react-icons/fa'
 
@@ -69,33 +69,42 @@ const Register = () => {
       <Wrapper className='full-page'>
           <form className='form' onSubmit={onSubmit}>
           
-          <h3>{values.isMember ? 'LOGIN' : 'REGISTER'}</h3>
+          <h3 className='btncurve'>{values.isMember ? 'LOGIN' : 'REGISTER'}</h3>
           
             {showAlert && <Alert/>} 
 
         {!values.isMember &&
-        <FormRow type='text' name='fname' labelText = 'First Name' value={values.fname} handleChange={handleChange}></FormRow>
+        <div className="input-row">
+        <input type='text' value={values.fname} name='fname'
+        className="custom-input" placeholder="First Name" onChange={handleChange}/>
+        </div>
         }
-
         {!values.isMember &&
-        <FormRow type='text' name='lname' labelText = 'Last Name' value={values.lname}  handleChange={handleChange}></FormRow>
+        <div className="input-row">
+        <input type='text' value={values.lname} name='lname'
+        className="custom-input" placeholder="Last Name" onChange={handleChange}/>
+        </div>
         }
-          
-        <FormRow type='email' name='email' value={values.email} handleChange={handleChange}></FormRow>
 
-        <div className='form-row'>
-          <label htmlFor='password' className='form-label'>Password</label>
-          <div className='flexContainer'>
-          <input type={showPassword ?'text':'password'} value={values.password} name='password'
-          onChange={handleChange} className='form-input inputMain'>
-          </input>
-          <button className='showbutton' onClick={handleClick}><FaEyeSlash/></button>
-          </div>
+          
+        
+        <div className="input-row">
+        <input type='email' value={values.email} name='email'
+        className="custom-input" placeholder="Email" onChange={handleChange}/>
         </div>
 
-        {/*<FormRow type='password' name='password' value={values.password} handleChange={handleChange}/>*/}  
+        <div className="input-row">
+        <input type={showPassword ?'text':'password'} value={values.password} name='password'
+        className="custom-input" placeholder="Password" onChange={handleChange}/>
+        <button className="custom-botton" type="submit" onClick={handleClick}><FaEyeSlash/></button>  
+        </div>
+
+        {/*<FormRow type='email' name='email' value={values.email} handleChange={handleChange}></FormRow>
+        <FormRow type='text' name='lname' labelText = 'Last Name' value={values.lname}  handleChange={handleChange}></FormRow>
+        <FormRow type='text' name='fname' labelText = 'First Name' value={values.fname} handleChange={handleChange}></FormRow>
+        <FormRow type='password' name='password' value={values.password} handleChange={handleChange}/>*/}  
     
-        <button type='submit' className='btn btn-block' disabled={isLoading}>
+        <button type='submit' className='btn btn-block btncurve' disabled={isLoading}>
         {isLoading?'Please Wait.....':'SUBMIT'}
         </button>
         
