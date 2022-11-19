@@ -56,7 +56,39 @@ const Wrapper = styled.section`
   border: none;
   }
 
+  .input-row {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.custom-input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 100px;
+  padding: 10px 100px 10px 20px; 
+  line-height: 1;
+  box-sizing: border-box;
+  outline: none;
+  background: var(--backgroundColor);
+}
+.custom-botton {
+  position: absolute;
+  right: 3px; 
+  top: 3px;
+  bottom: 3px;
+  border: 0;
+  background: var(--backgroundColor);
+  color: black;
+  outline: none;
+  margin: 0;
+  padding: 0 10px;
+  border-radius: 100px;
+  z-index: 2;
+}
 
+.btncurve{
+  border-radius: 100px;
+}
   @media (max-width: 992px) {
     .foot{
       margin-left: 10px;
