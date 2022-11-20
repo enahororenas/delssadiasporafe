@@ -9,16 +9,33 @@ import { useNavigate } from 'react-router-dom'
 
 const Dash = () => {
   const {user,getBday,bdays,totalBday,monthly,totalMonthly,getEvent,events,totalNews,getNews,
-    updateRead} = useAppContext()
-  const currentMonth = new Date().toISOString().slice(5, 7)
+    updateRead,getAnn,ann,totalAnn,annMonthly,totalAnnMonthly} = useAppContext()
+
+   let currentMonth = new Date().toISOString().slice(5, 7)
+     
+   if (currentMonth === '1' || currentMonth === '01') {currentMonth = 'Jan'}
+   if (currentMonth === '2' || currentMonth === '02') {currentMonth = 'Feb'}
+   if (currentMonth === '3' || currentMonth === '03') {currentMonth = 'Mar'}
+   if (currentMonth === '4' || currentMonth === '04') {currentMonth = 'Apr'}
+   if (currentMonth === '5' || currentMonth === '05') {currentMonth = 'May'}
+   if (currentMonth === '6' || currentMonth === '06') {currentMonth = 'Jun'}
+   if (currentMonth === '7' || currentMonth === '07') {currentMonth = 'Jul'}
+   if (currentMonth === '8' || currentMonth === '08') {currentMonth = 'Aug'}
+   if (currentMonth === '9' || currentMonth === '09') {currentMonth = 'Sep'} 
+   if (currentMonth === '10') {currentMonth = 'Oct'} 
+   if (currentMonth === '11') {currentMonth = 'Nov'} 
+   if (currentMonth === '12') {currentMonth = 'Dec'} 
+   
+
   const navigate = useNavigate()
-useEffect(()=>{
-  getBday()
-  getEvent()
-  getNews()  
-},[totalNews]);
+  useEffect(()=>{
+    getBday()
+    getEvent()
+    getNews()  
+    getAnn()
+  },[totalNews]);
   
-  //events.map((ev, index) => {console.log('TOT',ev.event,index)})
+  //console.log('TOT',bdays,'T<',totalAnnMonthly)
 
   const uname= user.fname+' '+user.lname
 
@@ -113,7 +130,27 @@ useEffect(()=>{
           <div className='dashbirthday'>
           <h3 className='bdaycaption'>Upcoming Birthday{totalMonthly > 1 && '\'s'}</h3>
           {monthly.map((bd, index) => {
-            return <div key={index}>{bd.fname} {bd.lname}'s birthday : {currentMonth}-{bd.day}</div>
+            return <div key={index}>{bd.fname} {bd.lname}'s birthday : {currentMonth} {bd.day}</div>
+            })}
+        </div>
+        }
+    </div>
+
+    <div className="bday_parent">
+    {totalAnn > 0 &&
+          <div className='dashbirthday'>
+          <h3 className='bdaycaption'>Anniversary{totalAnn > 1 && '\'s'}</h3>
+          {ann.map((bd, index) => {
+            return <div key={index}><FaBirthdayCake/> {bd.fname} {bd.lname}'s anniversary is today</div>
+            })}
+        </div>
+        }
+
+        {totalAnnMonthly > 0 &&
+          <div className='dashbirthday'>
+          <h3 className='bdaycaption'>Upcoming Anniversary{totalAnnMonthly > 1 && '\'s'}</h3>
+          {annMonthly.map((bd, index) => {
+            return <div key={index}>{bd.fname} {bd.lname}'s Anniversary : {currentMonth} {bd.day}</div>
             })}
         </div>
         }
