@@ -10,8 +10,8 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,DISPLAY_CUSTOM_A
     UPDATE_COMMENT_BEGIN,UPDATE_COMMENT_ERROR,UPDATE_COMMENT_SUCCESS,
     UPDATE_USER_IMAGE_BEGIN,UPDATE_USER_IMAGE_SUCCESS,UPDATE_USER_IMAGE_ERROR,
     GET_IMAGES_BEGIN,GET_IMAGES_SUCCESS,GET_IMAGES_ERROR,GET_BDAY_SUCCESS,
-    GET_NEWS_ITEM_BEGIN,GET_NEWS_ITEM_SUCCESS,GET_NEWS_ITEM_ERROR,
-    GET_MEMBERS_BEGIN,GET_MEMBERS_ERROR,GET_MEMBERS_SUCCESS,
+    GET_NEWS_ITEM_BEGIN,GET_NEWS_ITEM_SUCCESS,GET_NEWS_ITEM_ERROR,GET_PRES_SUCCESS,
+    GET_MEMBERS_BEGIN,GET_MEMBERS_ERROR,GET_MEMBERS_SUCCESS,GET_ANN_SUCCESS,
     ADD_NEW_USER_TO_REGISTER_BEGIN,ADD_NEW_USER_TO_REGISTER_SUCCESS,ADD_NEW_USER_TO_REGISTER_ERROR,
     MAKE_ADMIN_BEGIN,MAKE_ADMIN_SUCCESS,MAKE_ADMIN_ERROR,GET_EVENT_SUCCESS,
     DELETE_COMMENT_BEGIN,DELETE_COMMENT_ERROR,DELETE_COMMENT_SUCCESS,
@@ -21,6 +21,7 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,DISPLAY_CUSTOM_A
     EDIT_PROJECT_ERROR,EDIT_PROJECT_SUCCESS,DELETE_PROJECT_ERROR,DELETE_PROJECT_SUCCESS,EDIT_PROJECT_BEGIN,DELETE_PROJECT_BEGIN,
     ADD_EVENT_BEGIN,ADD_EVENT_ERROR,ADD_EVENT_SUCCESS,DELETE_EVENT_BEGIN,DELETE_EVENT_ERROR,DELETE_EVENT_SUCCESS,
     SEND_CODE_BEGIN,SEND_CODE_ERROR,SEND_CODE_SUCCESS,VAL_PIN_BEGIN,VAL_PIN_ERROR,VAL_PIN_SUCCESS,
+    ADD_NEW_PRES_BEGIN,ADD_NEW_PRES_ERROR,ADD_NEW_PRES_SUCCESS, GET_PRES_BEGIN,
  } from "./action";
 import reducer from "./reducer";
 import axios from 'axios'
@@ -53,6 +54,10 @@ const initialState = {
     totalBday:0,
     monthly:[],
     totalMonthly:0,
+    ann:[],
+    totalAnn:0,
+    annMonthly:[],
+    totalAnnMonthly:0,
     totalNews:0,
     numOfPages:1,
     page:1,
@@ -74,6 +79,8 @@ const initialState = {
     commentIndex:0,
     excoMembers:[],
     totalExco:0,
+    exPresidents:[],
+    totalExPresident:0,
     projects:[],
     totalProject:0,
     events:[],
@@ -334,6 +341,20 @@ const AppContext = React.createContext()
         clearAlert()
     }
 
+    const addPres = async(input) => {
+        dispatch({type:ADD_NEW_PRES_BEGIN})
+        try {
+            await authFetch.post('/gallery/addpres',input)
+            dispatch({type:ADD_NEW_PRES_SUCCESS})    
+        }catch(error){
+            dispatch({type:ADD_NEW_PRES_ERROR,
+                payload:{msg:error.response.data.msg}
+                })
+        }
+        clearAlert()
+    }
+
+
     const addLeader = async(input) => {
         dispatch({type:ADD_NEW_EXCO_BEGIN})
         try {
@@ -364,7 +385,16 @@ const AppContext = React.createContext()
         clearAlert()
     }    
 
-    
+    const getPres = async() => {
+        dispatch({type:GET_PRES_BEGIN})
+        let url =`/gallery/addpres`  
+        try { 
+        const {data} = await authFetch.get(url)
+        const{exPresident,totalExPres} = data
+        dispatch({type:GET_PRES_SUCCESS,payload:{exPresident,totalExPres}})    
+        }catch(error){}
+        clearAlert()
+    } 
 
     const addImage = async(input) => {
         dispatch({type:ADD_NEW_IMAGE_BEGIN})
@@ -442,6 +472,20 @@ const AppContext = React.createContext()
                 })
         }
         clearAlert()
+    }
+
+    const getAnn = async() => {
+        let url =`/auth/getann`
+        try{
+            const {data} = await authFetch.get(url)
+            //console.log('RETURNED',data)
+            const {ann,totalAnn,monthly,totalMonthly} = data
+    
+            dispatch({
+                type:GET_ANN_SUCCESS,
+                payload:{ann,totalAnn,monthly,totalMonthly}
+             })
+        }catch(error){ }
     }
 
     const getBday = async() => {
@@ -641,6 +685,7 @@ const AppContext = React.createContext()
             getMembers,
             deleteNews,
             getBday,
+            getAnn,
             createComment,
             getComments,
             updateUserComment,
@@ -664,6 +709,8 @@ const AppContext = React.createContext()
             sendCode,
             valToken,
             updateRead,
+            addPres,
+            getPres,
         }}>{children}</AppContext.Provider>
     )
 }
