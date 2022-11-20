@@ -17,6 +17,10 @@ const Wrapper = styled.div`
     //color: #974ede;
     color: var(--primary-300);
   }
+.h4head{
+  color: var(--primary-300);
+  margin-bottom: 15px;
+}
 
   .amt{
     font-weight: bolder;
