@@ -33,6 +33,7 @@ const {getProjects,projects,totalProject,isLoading} = useAppContext()
                         completed={Convert(projItem.completed)}
                         topic = {projItem.topic}
                         unit = {projItem.unit}
+                        donor ={projItem.donor}
                         />
                     </li>)})}
                     
