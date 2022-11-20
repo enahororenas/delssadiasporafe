@@ -19,6 +19,7 @@ const Profile = () => {
   const [fname,setFirstName] = useState(user.fname||'')
   const [location,setLocation] = useState(user.location||'')
   const [bday,setBday] = useState(user.bday||'')  
+  const [ann,setAnn] = useState(user.ann||'') 
   const [occupation,setOccupation] = useState(user.occupation||'')
   
   //const [position,setPosition] = useState(user.position||'')
@@ -64,7 +65,7 @@ const Profile = () => {
       displayAlert()
       return
     }
-    updateUser({ fname,lname, location,occupation,house,teacher,subject,yog,bday,email:user.email })
+    updateUser({ fname,lname, location,occupation,house,teacher,subject,yog,bday,email:user.email,ann })
     }
 
   const handleSubmit2 = (e) => {
@@ -125,6 +126,11 @@ const Profile = () => {
         <div className='form-row'>
         <label htmlFor="bday-month" className='form-label'>Birthday</label>
         <input type="date" name="bday" min="1900-01" max={currentDate} className='form-input' onChange={(e)=> setBday(e.target.value)}/>
+        </div>
+
+        <div className='form-row'>
+        <label htmlFor="ann-month" className='form-label'>Anniversary</label>
+        <input type="date" name="ann" min="1900-01" max={currentDate} className='form-input' onChange={(e)=> setAnn(e.target.value)}/>
         </div>
 
         <button className='btn btn-block' type='submit' disabled={isLoading}>
