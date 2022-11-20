@@ -1,7 +1,8 @@
 import ProgressBar from './ProgressBar'
 import Wrapper from '../assets/wrappers/Projectitem'
 
-const Projectitem = ({total,completed,topic,unit}) => {
+const Projectitem = ({total,completed,topic,unit,donor}) => {
+const allDonors = donor.split(',')
 
   return (
     <Wrapper>
@@ -12,6 +13,12 @@ const Projectitem = ({total,completed,topic,unit}) => {
         </div>
         <div>
           <ProgressBar completed={completed} total={total}/>
+        </div>
+        <div>
+          <h4 className='h4head'>Donors</h4>
+          <ul>
+            {allDonors.map((dn,i) => <li key={i}>{dn}</li>)}
+          </ul>
         </div>
       </div>
     </Wrapper>
