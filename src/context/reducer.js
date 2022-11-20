@@ -8,14 +8,15 @@ import { DISPLAY_ALERT, CLEAR_ALERT,TOGGLE_SIDE_BAR,LOGOUT_USER,CHANGE_IMAGE_PAG
     GET_IMAGES_BEGIN,GET_IMAGES_SUCCESS,GET_IMAGES_ERROR, SEND_EMAIL_SUCCESS,SEND_EMAIL_BEGIN,SEND_EMAIL_ERROR,
     ADD_NEW_IMAGE_BEGIN,ADD_NEW_IMAGE_SUCCESS,ADD_NEW_IMAGE_ERROR,
     ADD_NEWS_ITEM_BEGIN,ADD_NEWS_ITEM_SUCCESS,ADD_NEWS_ITEM_ERROR,
-    GET_NEWS_ITEM_BEGIN,GET_NEWS_ITEM_SUCCESS,GET_NEWS_ITEM_ERROR,
+    GET_NEWS_ITEM_BEGIN,GET_NEWS_ITEM_SUCCESS,GET_NEWS_ITEM_ERROR,GET_ANN_SUCCESS,
     GET_MEMBERS_BEGIN,GET_MEMBERS_ERROR,GET_MEMBERS_SUCCESS,GET_BDAY_SUCCESS,
     ADD_NEW_USER_TO_REGISTER_BEGIN,ADD_NEW_USER_TO_REGISTER_SUCCESS,ADD_NEW_USER_TO_REGISTER_ERROR,
     MAKE_ADMIN_BEGIN,MAKE_ADMIN_SUCCESS,MAKE_ADMIN_ERROR,UPDATE_GLOBAL_COUNT,
     UPDATE_COMMENT_BEGIN,UPDATE_COMMENT_ERROR,UPDATE_COMMENT_SUCCESS,
     DELETE_NEWS_ITEM_BEGIN,DELETE_NEWS_ITEM_ERROR,DELETE_NEWS_ITEM_SUCCESS,
     CREATE_COMMENT_BEGIN,CREATE_COMMENT_ERROR,CREATE_COMMENT_SUCCESS,
-    GET_COMMENT_BEGIN,GET_COMMENT_SUCCESS,GET_COMMENT_ERROR,
+    GET_COMMENT_BEGIN,GET_COMMENT_SUCCESS,GET_COMMENT_ERROR,GET_PRES_BEGIN,GET_PRES_SUCCESS,
+    ADD_NEW_PRES_BEGIN,ADD_NEW_PRES_ERROR,ADD_NEW_PRES_SUCCESS,
     DELETE_COMMENT_BEGIN,DELETE_COMMENT_ERROR,DELETE_COMMENT_SUCCESS,
     ADD_NEW_EXCO_BEGIN,ADD_NEW_EXCO_ERROR,ADD_NEW_EXCO_SUCCESS,GET_EVENT_SUCCESS,
     GET_EXCO_BEGIN,GET_EXCO_ERROR,GET_EXCO_SUCCESS,ADD_PROJECT_BEGIN,ADD_PROJECT_ERROR,ADD_PROJECT_SUCCESS,
@@ -329,6 +330,16 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
         }
       } 
 
+      if (action.type === GET_ANN_SUCCESS) {
+        return {
+          ...state,
+          ann: action.payload.ann,
+          totalAnn: action.payload.totalAnn,
+          annMonthly: action.payload.monthly,
+          totalAnnMonthly: action.payload.totalMonthly,
+        }
+      } 
+      
 
     if(action.type === ADD_NEW_IMAGE_BEGIN){
         return{...state,isLoading:true}
@@ -570,8 +581,26 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
         }
     }
 
-    if(action.type === ADD_NEW_EXCO_BEGIN){
+    if(action.type === ADD_NEW_EXCO_BEGIN|| action.type === ADD_NEW_PRES_BEGIN){
         return{...state,isLoading:true}
+    }
+
+    if(action.type === ADD_NEW_PRES_SUCCESS){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'success',
+        alertText:'New Ex President Added'
+        }
+    }
+
+    if(action.type === ADD_NEW_PRES_ERROR){
+        return{...state,
+        isLoading:false,
+        showAlert:true,
+        alertType:'danger',
+        alertText:action.payload.msg
+        }
     }
 
     if(action.type === ADD_NEW_EXCO_SUCCESS){
@@ -592,9 +621,19 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
         }
     }
 
-    if (action.type === GET_EXCO_BEGIN) {
+    if (action.type === GET_EXCO_BEGIN || action.type === GET_PRES_BEGIN) {
         return { ...state, isLoading: true, showAlert: false }
       }
+
+      if (action.type === GET_PRES_SUCCESS) {
+        return {
+          ...state,
+          isLoading: false,
+          exPresidents:action.payload.exPresident,
+          totalExPresident: action.payload.totalExPres,
+        }
+      }
+
       if (action.type === GET_EXCO_SUCCESS) {
         return {
           ...state,
