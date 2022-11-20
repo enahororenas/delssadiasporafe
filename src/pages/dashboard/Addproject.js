@@ -5,7 +5,7 @@ import { FormRow,Alert } from '../../components'
 import { useAppContext} from '../../context/appContext'
 
 const Addproject = () => {
-    const initialState = {topic:'',completed:'0', total:'',unit:''}
+    const initialState = {topic:'',completed:'0', total:'',unit:'',donor:''}
     const [values,setValues] = useState(initialState)    
     const [edit,setEdit] = useState(true)    
     const [del,setDelete] = useState(false)    
@@ -21,7 +21,7 @@ const Addproject = () => {
        const handleDropDownChange =(item) =>{setValues({...values,...item})}
 
        const clear = () => {
-        setValues({topic:'',completed:'0', total:'',unit:''})
+        setValues(initialState)
         settoggleProject(!toggleProject)
       }
        
@@ -38,7 +38,7 @@ const Addproject = () => {
 
     const handleUpdateSubmit = (e) => {
       e.preventDefault()
-      const {topic,completed,total,unit} = values
+      const {topic,completed,total,unit,donor} = values
 
       if(del){   deleteProject({topic,completed,total,unit}) }
       
@@ -52,11 +52,11 @@ const Addproject = () => {
           return
           }
         else {
-          editProject({topic,completed,total,unit})
+          editProject({topic,completed,total,unit,donor})
         }
       }
       
-          setValues({topic:'',completed:'0', total:'',unit:''})
+          setValues(initialState)
     }   
 
     const handleSubmit =(e) => {
@@ -72,7 +72,7 @@ const Addproject = () => {
           else {
             addNewProject({topic,completed,total,unit})
           }
-        setValues({topic:'',completed:'0', total:'',unit:''})
+        setValues(initialState)
     }    
 
   return (
@@ -114,6 +114,13 @@ const Addproject = () => {
         
         <FormRow type='text' labelText='Unit of Budget (₦,$,£)' name='unit' value={values.unit} 
         handleChange={handleChange}/>
+
+        <div className='form-row'>
+          <label className='form-label'>Donors (comma seperated)</label>
+          <textarea name="donor"  value={values.donor} onChange={handleChange}
+          style={{ marginTop: 15,width: '100%',maxWidth: '100%',height:'100px',fontFamily:'Sans-Serif,cabin',fontSize:'0.875rem'}}/>
+        </div>
+        
 
         <label >Edit 
           <input name="edit" type="radio"  checked={edit} onChange={(e)=>{handleRadioOption('edit',e.target.value)}}/>
