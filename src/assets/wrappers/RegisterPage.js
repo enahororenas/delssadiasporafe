@@ -61,11 +61,29 @@ const Wrapper = styled.section`
   width: 100%;
   margin-bottom: 20px;
 }
+
+.customprop{
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 100px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom:10px; 
+  line-height: 1;
+  box-sizing: border-box;
+  outline: none;
+  background: var(--backgroundColor);
+}
+
 .custom-input {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 100px;
-  padding: 10px 100px 10px 20px; 
+  //padding: 10px 100px 10px 20px; 
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom:10px;
+  padding-right: 10%;
   line-height: 1;
   box-sizing: border-box;
   outline: none;
