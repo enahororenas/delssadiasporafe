@@ -90,7 +90,7 @@ const Register = () => {
         
         <div className="input-row">
         <input type='email' value={values.email} name='email'
-        className="custom-input" placeholder="Email" onChange={handleChange}/>
+        className="customprop" placeholder="Email" onChange={handleChange}/>
         </div>
 
         <div className="input-row">
