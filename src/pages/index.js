@@ -3,4 +3,5 @@ import Register from "./Register";
 import Landing from "./Landing";
 import ProtectedRoute from "./ProtectedRoute";
 import Reset from "./Reset";
-export {Landing, Register, Error,ProtectedRoute,Reset}
+import TC from "./tc";
+export {Landing, Register, Error,ProtectedRoute,Reset,TC}
