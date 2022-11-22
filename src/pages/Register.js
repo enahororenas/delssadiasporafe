@@ -1,5 +1,5 @@
 import React,{ useEffect,useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import Wrapper from '../assets/wrappers/RegisterPage'
 import { Alert } from '../components'
 import { useAppContext} from '../context/appContext'
@@ -28,6 +28,11 @@ const Register = () => {
   const handleClick = (e)=>{
     e.preventDefault()
     setShowPassword(!showPassword)
+  }
+
+  const handleTC =(e)=>{
+    e.preventDefault()
+    navigate('/tc')
   }
   
     const handleChange =(e) =>{
@@ -103,6 +108,19 @@ const Register = () => {
         <FormRow type='text' name='lname' labelText = 'Last Name' value={values.lname}  handleChange={handleChange}></FormRow>
         <FormRow type='text' name='fname' labelText = 'First Name' value={values.fname} handleChange={handleChange}></FormRow>
         <FormRow type='password' name='password' value={values.password} handleChange={handleChange}/>*/}  
+
+
+        {!values.isMember &&
+        <div>
+          <span>
+          By signing up, you agree to our Terms, Privacy Policy, and Cookie Use. 
+          DELSSADIASPORA may use your contact information, including your email address and phone number 
+          for purposes outlined in our Privacy Policy. 
+          </span>
+          &nbsp;
+          <Link to='/reset' style={{color:'#2cb1bc'}} onClick={handleTC}>Learn more</Link>
+        </div>
+        }
     
         <button type='submit' className='btn btn-block btncurve' disabled={isLoading}>
         {isLoading?'Please Wait.....':'SUBMIT'}
