@@ -85,6 +85,10 @@ const initialState = {
     totalProject:0,
     events:[],
     totalEvent:0,
+    projMembers:[],
+    totalProjectComm:0,
+    mediaMembers:[],
+    totalMedia:0,
 }
 
 const AppContext = React.createContext()
@@ -373,9 +377,9 @@ const AppContext = React.createContext()
         let url =`/gallery/addleader`  
         try { 
         const {data} = await authFetch.get(url)
-        const{excoMembers,totalExco} = data
+        const{excoMembers,totalExco,projMembers,totalProject,mediaMembers,totalMedia} = data
         dispatch({type:GET_EXCO_SUCCESS,
-            payload:{excoMembers,totalExco}
+            payload:{excoMembers,totalExco,projMembers,totalProject,mediaMembers,totalMedia}
         })    
         }catch(error){
             dispatch({type:GET_EXCO_ERROR,
