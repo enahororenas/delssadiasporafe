@@ -9,6 +9,7 @@ const Addleader = () => {
     const [Title,setTitle] = useState('')
     const [Name,setName] = useState('')
     const [pres,setPres] = useState('')
+    const [pos,setPos] = useState('')
     const [selectedFile, setSelectedFile] = useState('');
     const [image, setPreviewSource] = useState(null);
     const [toggleProject,settoggleProject] = useState(true)
@@ -20,6 +21,7 @@ const Addleader = () => {
       setTitle('')
       setName('')
       setPres('')
+      setPos('')
       setPreviewSource(null)
     }
 
@@ -28,6 +30,7 @@ const Addleader = () => {
       setTitle('')
       setName('')
       setPres('')
+      setPos('')
       setPreviewSource(null)
       settoggleProject(!toggleProject)
     }
@@ -53,7 +56,7 @@ const Addleader = () => {
         e.preventDefault()
 
        if(toggleProject){
-        if(!selectedFile || !Name || !Title){
+        if(!selectedFile || !Name || !Title||!pos){
           displayAlert()
           return
         }
@@ -72,7 +75,7 @@ const Addleader = () => {
            }
             
     if(toggleProject){    
-           addLeader({Title,Name,image,pos:'lead'})  
+           addLeader({Title,Name,image,pos})  
            setSelectedFile('')
            setTitle('')
            setName('')
@@ -109,6 +112,12 @@ const Addleader = () => {
        <FormRow type='text' labelText='Name' name='Name' value={Name} 
        handleChange={(e)=> setName(e.target.value)}/>     
       }
+
+      {toggleProject &&
+      <FormRow type='text' labelText='Group' name='pos' value={pos} 
+       handleChange={(e)=> setPos(e.target.value)}/>     
+      }
+
         {toggleProject ?
          <FormRow type='text' labelText='Position' name='Title' value={Title} 
          handleChange={(e)=> setTitle(e.target.value)}/>
