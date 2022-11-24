@@ -640,6 +640,10 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
           isLoading: false,
           excoMembers:action.payload.excoMembers,
           totalExco: action.payload.totalExco,
+          projMembers:action.payload.projMembers,
+          totalProjectComm:action.payload.totalProject,
+          mediaMembers:action.payload.mediaMembers,
+          totalMedia:action.payload.totalMedia,
         }
       } 
 
