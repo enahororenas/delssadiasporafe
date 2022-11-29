@@ -10,7 +10,8 @@ import { FaGraduationCap } from "react-icons/fa";
 
 const Leadership = () => {
   
-  const {getExco,excoMembers,totalExco,totalProjectComm,projMembers,mediaMembers,totalMedia} = useAppContext()
+  const {getExco,excoMembers,totalExco,totalProjectComm,projMembers,
+    mediaMembers,totalMedia,welfareMembers,totalWelfare} = useAppContext()
   
   useEffect(()=>{
     getExco()
@@ -25,7 +26,7 @@ const Leadership = () => {
     
   return (
     <Wrapper>
-        <div className='navcontrol'><Gallerynavbar top='Executive Committee'/></div>
+        <div className='navcontrol'><Gallerynavbar top='DELSSA Diaspora Leadership'/></div>
 
         <Fade right>  
         <div style={{textAlign:'center',marginTop:'20px'}}>
@@ -131,7 +132,41 @@ const Leadership = () => {
         </VerticalTimeline>
       </div>
     </div>
-        
+
+    <Fade right>  
+        <div style={{textAlign:'center',marginTop:'20px'}}>
+          <h2>Welfare Committee</h2>
+       </div> 
+    </Fade>
+
+    <div className= "body-section">
+          <div className="timeline-section">
+            <VerticalTimeline lineColor="#FF1042">
+          {totalWelfare > 0 && welfareMembers.map((item, index) => (
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: colors[checkNum(index)], color: "#fff" }}
+              contentArrowStyle={{ borderRight: "7px solid  #FFBB24" }}
+              iconStyle={{ background: colors[checkNum(index)], color: "#fff" }}
+              icon={<FaGraduationCap />}
+              key={index}
+            >
+
+              <h3 className="vertical-timeline-element-title namefield">
+                {item.name}
+              </h3>
+              <h5 className="vertical-timeline-element-subtitle" style={{color:"yellow"}}>
+                {item.title}
+              </h5>
+
+              <img className='imagebody' src={item.url} alt=''/>
+            </VerticalTimelineElement>
+          ))}
+        </VerticalTimeline>
+      </div>
+    </div>
+
+
     </Wrapper>
   )
 }
