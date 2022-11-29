@@ -644,6 +644,8 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
           totalProjectComm:action.payload.totalProject,
           mediaMembers:action.payload.mediaMembers,
           totalMedia:action.payload.totalMedia,
+          welfareMembers:action.payload.welfareMembers,
+          totalWelfare:action.payload.totalWelfare
         }
       } 
 
