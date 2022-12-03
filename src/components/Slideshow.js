@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Thumbnail from './Thumbnail'
 import Wrapper from '../assets/wrappers/Slideshow'
 import Comments from './Comment/Comments'
 import { useAppContext } from '../context/appContext'
 import ImageBtnContainer from './ImageBtnContainer'
+import { MdClose } from 'react-icons/md'
 
 const Slideshow = ({ imgs }) => {
     const {commentIndex,updateGlobalIndex,numOfImagePage} = useAppContext()
@@ -25,14 +26,23 @@ const Slideshow = ({ imgs }) => {
       }
     }
 
-    
+    const [model,setModel] =useState(false)
+    const [templateImg, setTemplateImg] = useState('')
+    const getImg = (src) => {
+        setModel(true)
+        setTemplateImg(src)
+    }
     
     return (
     <Wrapper>
     <div className="slideshow">
 
       <div className='allimgp'>
-      <img className="mainImg" src={imgs[commentIndex].url} alt=''/>
+      <div className={model ? 'model open': 'model'}>
+        <img src={templateImg} alt=''/>
+        <MdClose onClick={()=>setModel(false)}/>
+    </div>
+      <img className="mainImg" src={imgs[commentIndex].url} alt='' onClick={()=>getImg(imgs[commentIndex].url)}/>
       <div className="actions">
         <button className='leftbtn' onClick={prev}>👈</button>
         <button className='rightbtn' onClick={next}>👉</button>
