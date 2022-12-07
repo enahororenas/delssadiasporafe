@@ -44,14 +44,17 @@ const Register = () => {
     
       const {fname,lname,email,password,isMember} = values
 
-      if((!fname && !lname && !isMember) || !email || !password){
-        //console.log('NOT A MEMBER')
-        displayAlert()
-        return
-      } 
-      if (!isMember && (fname === '' || lname === '' || email === '' || password === '')) {
-        displayAlert()
-        return
+      if (isMember){
+        if( !email || !password || email === '' || password === ''){
+          //console.log('NOT A MEMBER')
+          displayAlert()
+          return
+        }
+      } else {
+        if (!fname || !lname || !email || !password || fname === '' || lname === '' || email === '' || password === '') {
+          displayAlert()
+          return
+        }
       }
       
       const currentUser = {fname,lname,email:email.toLowerCase(),password}
