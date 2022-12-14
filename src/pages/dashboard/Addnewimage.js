@@ -42,12 +42,18 @@ const Addnewimage = () => {
           }
           
           const max = 1*(10**7)
-          for(const file of selectedFile) { 
+          var inmax = 0
+          for(const file of selectedFile) { inmax = inmax + file.size
             if(parseInt(file.size) > max) {
               customAlert('IMAGE SIZE TOO BIG!! '+file.name+' must be < 10mb')
             return
             }
           }  
+
+          if(inmax > 50000000) {
+            customAlert('IMAGE SIZE TOO BIG!! Total must be < 50mb')
+            return
+          }
             
           addImage({allImages,caption})
           setSelectedFile([])
