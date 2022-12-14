@@ -104,7 +104,7 @@ const Register = () => {
         <div className="input-row">
         <input type={showPassword ?'text':'password'} value={values.password} name='password'
         className="custom-input" placeholder="Password" onChange={handleChange}/>
-        <button className="custom-botton" type="submit" onClick={handleClick}><FaEyeSlash/></button>  
+        <button className="custom-botton" type="submit" ><FaEyeSlash onClick={handleClick}/></button>  
         </div>
 
         {/*<FormRow type='email' name='email' value={values.email} handleChange={handleChange}></FormRow>
