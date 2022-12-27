@@ -152,7 +152,8 @@ const AppContext = React.createContext()
     }
 
     const wakeUp = async() => {
-        await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/dias/auth/wake`)
+        const userInfo = await axios.get('https://geolocation-db.com/json/')
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/dias/auth/wake`,userInfo.data)
     }  
 
     const setupUser = async({currentUser,endPoint,alertText}) => {
