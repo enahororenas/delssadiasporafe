@@ -151,6 +151,10 @@ const AppContext = React.createContext()
         localStorage.removeItem('location')
     }
 
+    const wakeUp = async() => {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/dias/auth/wake`)
+    }  
+
     const setupUser = async({currentUser,endPoint,alertText}) => {
         //console.log('LOGIN CURRENT FUNC',currentUser,endPoint,process.env.REACT_APP_SERVER_URL)     
         
@@ -717,6 +721,7 @@ const AppContext = React.createContext()
             updateRead,
             addPres,
             getPres,
+            wakeUp,
         }}>{children}</AppContext.Provider>
     )
 }
