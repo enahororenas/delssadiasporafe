@@ -1,9 +1,15 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Wrapper from '../assets/wrappers/LandingPage'
 import { Link } from 'react-router-dom'
 import groupArt from '../assets/svg/group2.svg'
+import { useAppContext } from '../context/appContext'
 
 const Landing = () => {
+  const {wakeUp} = useAppContext()
+  useEffect(() => {
+    wakeUp()
+  }, [])
+
     return (
         <Wrapper>          
           <div className='container page'>
