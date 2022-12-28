@@ -91,6 +91,9 @@ const initialState = {
     totalMedia:0,
     welfareMembers:[],
     totalWelfare:0,
+    sort: 'latest',
+    sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+    searchCountry: 'ALL',
 }
 
 const AppContext = React.createContext()
@@ -515,9 +518,11 @@ const AppContext = React.createContext()
     }
 
     const getMembers = async() => {
-        const { page, search } = state
+        const { page, search,sort, searchCountry } = state
 
-       let url = `/members/getmembers?page=${page}`
+        //console.log('APP',page, search,sort, searchCountry)
+
+       let url = `/members/getmembers?page=${page}&country=${searchCountry}&sort=${sort}`
         if (search) {url = url + `&search=${search}`}
     
          //let url =`/members/getmembers`    
