@@ -6,11 +6,11 @@ import PageBtnContainer from './PageBtnContainer'
 import Membercontainer from './Membercontainer'
 
 const JobsContainer = () => {
-  const {getMembers,members,isLoading,page,search,numOfPages,totalMembers} = useAppContext()
+  const {getMembers,members,isLoading,page,search,numOfPages,totalMembers,sort,searchCountry} = useAppContext()
 
   useEffect(() => {
     getMembers()
-  },[page, search])
+  },[page, search,sort,searchCountry])
   
   if (isLoading) {  return <Loading center /> }
 
@@ -18,7 +18,7 @@ const JobsContainer = () => {
   if (totalMembers === 0) {
     return (
       <Wrapper>
-        <h2>No member to display...</h2>
+        <h2 style={{textAlign:'center'}}>No member to display...</h2>
       </Wrapper>
     )
   }
