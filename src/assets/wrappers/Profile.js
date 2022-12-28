@@ -34,7 +34,9 @@ const Wrapper = styled.section`
     height: 35px;
     margin-top: 1rem;
   }
-
+  .form-prop{
+    font-size: 0.875rem;
+  }
   .clear-btn {
     background: var(--grey-500);
   }
