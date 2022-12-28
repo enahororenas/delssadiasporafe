@@ -26,6 +26,9 @@ const Wrapper = styled.section`
     align-self: end;
     margin-top: 1rem;
   }
+  .form-prop{
+    font-size: 0.875rem;
+  }
   @media (min-width: 768px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
