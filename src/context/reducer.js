@@ -168,6 +168,7 @@ if(action.type === UPDATE_USER_IMAGE_ERROR){
           searchStatus: 'all',
           searchType: 'all',
           sort: 'latest',
+          searchCountry: 'ALL',
         }
       }
 
