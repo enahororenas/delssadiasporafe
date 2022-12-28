@@ -2,8 +2,11 @@ import React, {useState} from 'react'
 import { FormRow,Alert } from '../../components'
 import Wrapper from '../../assets/wrappers/Profile'
 import { useAppContext } from '../../context/appContext'
-//import { useNavigate } from 'react-router-dom'
+import { Select, MenuItem } from "@mui/material";
 import {Gallerynavbar} from '../../components'
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
+
 
 const Profile = () => {
   const {user,showAlert,displayAlert,updateUser,isLoading,customAlert,updateUsersImage} = useAppContext()
@@ -12,33 +15,31 @@ const Profile = () => {
   const [selectedFile, setSelectedFile] = useState('');
   const [profile_pic, setImage ] = useState('');
 
-  //const [backB, setBackB] = useState('');
-
-  
   const [lname,setLastName] = useState(user.lname||'')
   const [fname,setFirstName] = useState(user.fname||'')
   const [location,setLocation] = useState(user.location||'')
   const [bday,setBday] = useState(user.bday||'')  
   const [ann,setAnn] = useState(user.ann||'') 
   const [occupation,setOccupation] = useState(user.occupation||'')
-  
-  //const [position,setPosition] = useState(user.position||'')
-  //const [company,setCompany] = useState(user.company||'')
-
   const [house,setHouse] = useState(user.house||'')
   const [teacher,setTeacher] = useState(user.teacher||'')
   const [yog,setYog] = useState(user.yog||'')
   const [subject,setSubject] = useState(user.subject||'')
+  const [country, setSelectedCountry] = useState(user.country||'')
+  
+
+  countries.registerLocale(enLocale);
+  const countryObj = countries.getNames("en", { select: "official" });
+
+  const countryArr = Object.entries(countryObj).map(([key, value]) => {
+    return {
+      label: value,
+      value: key
+    };
+  });
   
   const dt = new Date();
   const currentDate = dt.toISOString().slice(0, 10)
-
- /* 
-  const navigate = useNavigate()
-  useEffect(() => {
-    if(backB === 'move'){navigate('/user')}
-  },[backB,navigate])
-  */
 
 
   const handleFileInputChange = (e) => {
@@ -61,11 +62,11 @@ const Profile = () => {
 
   const handleSubmit =(e) => { 
     e.preventDefault()
-    if(!fname||!lname||!location||!occupation||!house||!teacher||!subject||!yog||!bday){
+    if(!fname||!lname||!location||!occupation||!house||!teacher||!subject||!yog||!bday||!country){
       displayAlert()
       return
     }
-    updateUser({ fname,lname, location,occupation,house,teacher,subject,yog,bday,email:user.email,ann })
+    updateUser({ fname,lname, location,occupation,house,teacher,subject,yog,bday,email:user.email,ann,country })
     }
 
   const handleSubmit2 = (e) => {
@@ -125,13 +126,25 @@ const Profile = () => {
 
         <div className='form-row'>
         <label htmlFor="bday-month" className='form-label'>Birthday</label>
-        <input type="date" name="bday" min="1900-01" max={currentDate} className='form-input' onChange={(e)=> setBday(e.target.value)}/>
+        <input type="date" name="bday" min="1900-01" max={currentDate} value={bday}
+        className='form-input' onChange={(e)=> setBday(e.target.value)}/>
         </div>
 
         <div className='form-row'>
         <label htmlFor="ann-month" className='form-label'>Anniversary</label>
-        <input type="date" name="ann" min="1900-01" max={currentDate} className='form-input' onChange={(e)=> setAnn(e.target.value)}/>
+        <input type="date" name="ann" min="1900-01" max={currentDate} className='form-input' value={ann}
+        onChange={(e)=> setAnn(e.target.value)}/>
         </div>
+
+        <div className='form-row'>
+        <label htmlFor="ann-month" className='form-label'>Country</label>
+        <Select className='form-input form-prop' value={country} onChange={(e) => setSelectedCountry(e.target.value)}>
+        {!!countryArr?.length &&
+          countryArr.map(({ label, value }) => (
+            <MenuItem key={value} value={value}>{label}</MenuItem>
+          ))}
+      </Select>
+      </div>
 
         <button className='btn btn-block' type='submit' disabled={isLoading}>
           {isLoading?'Please Wait.....':'save profile changes'}
