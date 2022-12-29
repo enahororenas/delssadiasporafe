@@ -6,7 +6,7 @@ import enLocale from "i18n-iso-countries/langs/en.json";
 import { Select, MenuItem } from "@mui/material";
 
 const SearchContainer = () => {
-  const {isLoading,search,handleChange,clearFilters,sort,sortOptions,searchCountry} = useAppContext()
+  const {isLoading,search,handleChange,clearFilters,sort,sortOptions,searchCountry,page,changePage} = useAppContext()
   countries.registerLocale(enLocale);
   const countryObj = countries.getNames("en", { select: "official" });
   const countryArr = Object.entries(countryObj).map(([key, value]) => {
@@ -19,11 +19,11 @@ const SearchContainer = () => {
   
   const handleSearch = (e) => {
     if (isLoading) return
+    if(e.target.name === 'searchCountry' && e.target.value !== 'ALL' && page > 1 ) {changePage(1)}
     handleChange({ name: e.target.name, value: e.target.value })
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    //console.log('Searching for',search)
     clearFilters()
   }
 
