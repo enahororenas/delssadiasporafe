@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {Register, Landing, Error,ProtectedRoute,Reset,TC} from './pages'
 import {Profile,Dash,About,Contact,News,Gallery,Addleader,Leadership,Project,Addproject,
-  Addnewimage,Addnewsitem,Members,Adduser,Deletenewsitem} from './pages/dashboard'
+  Addnewimage,Addnewsitem,Members,Adduser,Deletenewsitem,Resources} from './pages/dashboard'
 
 
 
@@ -18,6 +18,7 @@ function App() {
       <Route path='/user' element={<ProtectedRoute><Dash/></ProtectedRoute>}/>
       <Route path='/about' element={<ProtectedRoute><About/></ProtectedRoute>}/>
       <Route path='/contact' element={<ProtectedRoute><Contact/></ProtectedRoute>}/>
+      <Route path='/resources' element={<ProtectedRoute><Resources/></ProtectedRoute>}/>
       <Route path='/news' element={<ProtectedRoute><News/></ProtectedRoute>}/>
       <Route path='/gallery' element={<ProtectedRoute><Gallery/></ProtectedRoute>}/>
       <Route path='/members' element={<ProtectedRoute><Members/></ProtectedRoute>}/>
