@@ -6,6 +6,16 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr;
   }
 
+  .ckt{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  .lik{
+    color: var(--primary-500);
+  }
   .imgtop{
     text-align: center;
     margin-top: 20px;
@@ -43,6 +53,10 @@ const Wrapper = styled.section`
     }
     .dashboard-page {
       width: 90%;
+    }
+    .ckt{
+    font-size: 40px;
+    margin-top: 30px;
     }
   }
 
