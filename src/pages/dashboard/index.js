@@ -15,5 +15,6 @@ import Adduser from './Adduser'
 import Deletenewsitem from "./Deletenewsitem";
 import Project from "./Project";
 import Addproject from "./Addproject";
+import Resources from "./Resources";
 export {Profile,SharedLayout,Dash,About,GeneralSharedLayout,Contact,Addleader,Leadership,Project,Addproject,
-    News,Gallery,Addnewimage,Addnewsitem,Members,Adduser,Deletenewsitem}
+    News,Gallery,Addnewimage,Addnewsitem,Members,Adduser,Deletenewsitem,Resources}
