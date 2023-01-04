@@ -13,7 +13,7 @@ import {GrProjects} from 'react-icons/gr'
     const adminlinks = [
         {id:1,text:'news',path:'/news',icon:<FaNewspaper/>},
         {id:2,text:'about',path:'/about',icon:<FaInfo/>},
-        {id:3,text:'contact us',path:'/contact',icon:<FaWpforms/>},
+        {id:3,text:'Resources',path:'/resources',icon:<FaWpforms/>},
         {id:4,text:'Edit profile',path:'/profile',icon:<ImProfile/>},
         {id:5,text:'Home',path:'/user',icon:<FaHome/>},
         {id:6,text:'Gallery',path:'/gallery',icon:<ImFilePicture/>},

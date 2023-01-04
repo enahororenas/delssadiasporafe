@@ -1,6 +1,6 @@
 import {FaNewspaper} from 'react-icons/fa'
 import {FaInfo} from 'react-icons/fa'
-import {FaWpforms} from 'react-icons/fa'
+import {FaWpforms,FaBuffer} from 'react-icons/fa'
 import {ImProfile} from 'react-icons/im'
 import { FaHome } from 'react-icons/fa'
 import { ImFilePicture } from 'react-icons/im'
@@ -17,6 +17,7 @@ import {RiRefund2Line} from 'react-icons/ri'
         {id:7,text:'Members',path:'/members',icon:<IoIosPeople/>},
         {id:8,text:'Chapter Projects',path:'/project',icon:<RiRefund2Line/>},
         {id:9,text:'Executive Committee',path:'/exco',icon:<IoIosPeople/>},
+        {id:10,text:'Resources',path:'/resources',icon:<FaBuffer/>},
             ]
         
 export default links
