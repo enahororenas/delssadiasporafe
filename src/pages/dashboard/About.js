@@ -5,6 +5,7 @@ import Wrapper from '../../assets/wrappers/About'
 import {Navbar,BigSidebar,SmallSidebar} from '../../components'
 import { FaGraduationCap } from "react-icons/fa";
 import { useAppContext } from '../../context/appContext'
+import { Link } from 'react-router-dom'
 
 const checkNum = (i) => {
   if(i > 3) { return i % 4 }
@@ -45,7 +46,7 @@ const About = () => {
             <SmallSidebar/>
             <BigSidebar/>
             <div>
-              <Navbar top ='Contact Us'/>
+              <Navbar top ='About'/>
               <div>
 
             <div className='imgtop'><img src={dellogo} alt=''/></div>
@@ -89,6 +90,11 @@ const About = () => {
 
           </div>
         </div>
+
+      <div className='ckt'>
+      <Link className='lik' to='/contact'>Contact us</Link>
+      </div>
+        
 
           </div>
         </div>
